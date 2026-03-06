@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BarberLink</title>
+    <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="cursor-highlight"></div>
+    <nav>
+      <div class="nav-left">
+        <a href="../partnerPage/index.html" class="be-partner">Be a Partner</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="../HomePage/index.html" class="nav-link">Home</a>
+        <a href="../BookingPage/index.html" class="nav-link">Booking</a>
+        <a href="#" class="nav-link">Shop</a>
+        <a href="../jobsPage/index.html" class="nav-link">Jobs</a>
+        
+        <!-- Profile Avatar (Hidden by default, shown when logged in) -->
+        <div class="user-profile" id="userProfile" style="display: none;">
+          <div class="avatar-circle" id="userAvatar">
+            <!-- First letter will be inserted here by JavaScript -->
+          </div>
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="profile-info">
+              <p class="profile-name" id="profileName">User Name</p>
+<p class="profile-email" id="profileEmail">user@example.com</p>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-link">Profile Settings</a>
+            <a href="#" class="dropdown-link">My Bookings</a>
+            <a href="#" class="dropdown-link" id="logoutBtn">Logout</a>
+          </div>
+        </div>
+        
+        <!-- Login Button  -->
+        <a href="../Signup-login/index.html" class="login-btn" id="loginBtn" style="display: none;">Login</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1 class="hero-title">
+        BRINGING YOU CLOSER TO EXPERT BARBERING SERVICES<br />
+        AND HIGH-END SHOP ESSENTIALS
+      </h1>
+    </section>
+
+   <div class="cta-container">
+  <a href="../BookingPage/index.html" class="cta-link">
+    <button class="cta">
+      <span class="hover-underline-animation">book now</span>
+      <svg
+        id="arrow-horizontal"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="10"
+        viewBox="0 0 46 16"
+      >
+        <path
+          d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+          transform="translate(30)"
+        ></path>
+      </svg>
+    </button>
+  </a>
+</div>
+
+
+    <section class="barberlink-section">
+      <div class="barberlink-container">
+        <!-- Letters -->
+        <div class="letter letter-b1 initial">B</div>
+        <div class="letter letter-a1 initial">A</div>
+        <div class="letter letter-r1 initial">R</div>
+        <div class="letter letter-b2 initial">B</div>
+        <div class="letter letter-e initial">E</div>
+        <div class="letter letter-r2 initial">R</div>
+        <div class="letter letter-l initial">L</div>
+        <div class="letter letter-i initial">I</div>
+        <div class="letter letter-n initial">N</div>
+        <div class="letter letter-k initial">K</div>
+
+        <!-- Tools - correct order under each letter -->
+        <img src="imgs/brush.png" alt="Brush" class="tool-img tool-brush" />
+        <img
+          src="imgs/scissors.png"
+          alt="Scissors"
+          class="tool-img tool-scissors1"
+        />
+        <img
+          src="imgs/barbericon.png"
+          alt="Barber Icon"
+          class="tool-img tool-barbericon"
+        />
+        <img src="imgs/razor.png" alt="Razor" class="tool-img tool-razor1" />
+        <img src="imgs/comb.png" alt="Comb" class="tool-img tool-comb" />
+        <img
+          src="imgs/mustache.png"
+          alt="Mustache"
+          class="tool-img tool-mustache"
+        />
+        <img
+          src="imgs/barbericon.png"
+          alt="Barber Icon"
+          class="tool-img tool-barbericon2"
+        />
+        <img src="imgs/hat.png" alt="Hat" class="tool-img tool-hat" />
+        <img
+          src="imgs/scissors.png"
+          alt="Scissors"
+          class="tool-img tool-scissors2"
+        />
+        <img src="imgs/comb.png" alt="Comb" class="tool-img tool-comb2" />
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-title-section">
+      <h1 class="about-title">our story , your style</h1>
+      <div class="about-text-center">
+        <p id="about-text">
+  BarberLink was established to create an innovative, unified digital
+  ecosystem connecting professional barbers, their clients, and the
+  reliable resources they depend on. <span class="highlight-on-scroll">The platform enables clients to
+  seamlessly discover and book trusted barbershops, while providing
+  barbers with direct access to essential tools and products through our
+  integrated online shop.</span> By combining service discovery, resource
+  management, and community engagement in one place, BarberLink serves
+  as a comprehensive hub designed to advance efficiency, accessibility,
+  and growth within the barbering industry.
+</p>
+      </div>
+      <div class="cta-container">
+        <button class="cta">
+          <span class="hover-underline-animation"> shop now </span>
+          <svg
+            id="arrow-horizontal"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="10"
+            viewBox="0 0 46 16"
+          >
+            <path
+              id="Path_10"
+              data-name="Path 10"
+              d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+              transform="translate(30)"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial-area">
+      <div class="container">
+        <div class="sec-title white-title">
+          <h2>Testimonials</h2>
+          <p>Trusted by Our Customers</p>
+        </div>
+        <div class="testimonial-content owl-carousel">
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              This hub makes booking barber appointments so simple and
+              convenient! I love how easy it's to find top-rated, trusted
+              barbers.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>Ahmad Qudah</h6>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              Since joining the hub, my shop has seen a noticeable increase in
+              new clients. The platform is a game-changer for barbers like us.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>Mohammad Ahmad</h6>
+                <span>Barbershop Owner</span>
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              I appreciate how the hub connects me with skilled barbers quickly.
+              The reviews and ratings really help me choose the right one.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>David Ali</h6>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              Managing appointments and supplies through this hub has saved us
+              so much time. Highly recommend it to other shop owners.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>Omar Khalil</h6>
+                <span>Barbershop Owner</span>
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              This hub makes booking barbers easy, reliable, and always connects me with the best professionals nearby.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>Yousef Ahmad</h6>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+          <div class="single-testimonial">
+            <div class="round-1 round"></div>
+            <div class="round-2 round"></div>
+            <p>
+              The hub is incredibly user-friendly, making it easy to navigate
+              and find exactly what I need within seconds everytime I book
+              through it.
+            </p>
+            <div class="client-info">
+              <div class="client-details">
+                <h6>Rami Al-Hassan</h6>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<!-- Profile Settings Modal -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>Profile Settings</h2>
+      <i class="bx bx-x close-modal" onclick="closeProfileModal()"></i>
+    </div>
+    
+    <div class="modal-body">
+      
+      <!-- Settings Options -->
+      <div class="settings-options">
+        <div class="settings-option" onclick="showSettingForm('username')">
+          <i class="bx bx-user-circle"></i>
+          <div class="option-text">
+            <h3>Change Username</h3>
+            <p>Update your username</p>
+          </div>
+          <i class="bx bx-chevron-right"></i>
+        </div>
+        
+        <div class="settings-option" onclick="showSettingForm('email')">
+          <i class="bx bx-envelope"></i>
+          <div class="option-text">
+            <h3>Change Email</h3>
+            <p>Update your email address</p>
+          </div>
+          <i class="bx bx-chevron-right"></i>
+        </div>
+        
+        <div class="settings-option" onclick="showSettingForm('password')">
+          <i class="bx bx-lock-alt"></i>
+          <div class="option-text">
+            <h3>Change Password</h3>
+            <p>Update your password</p>
+          </div>
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div>
+      
+      <!-- Change Username Form -->
+      <div class="settings-form" id="username-form" style="display: none;">
+        <button class="back-button" onclick="showSettingsOptions()">
+          <i class="bx bx-arrow-back"></i> Back
+        </button>
+        
+        <h3 class="form-title">Change Username</h3>
+        
+        <form id="username-change-form">
+          <div class="profile-field">
+            <label for="current-username">Current Username</label>
+            <div class="input-group">
+              <i class="bx bx-user-circle"></i>
+              <input type="text" id="current-username" readonly />
+            </div>
+          </div>
+          
+          <div class="profile-field">
+            <label for="new-username">New Username</label>
+            <div class="input-group">
+              <i class="bx bx-user-circle"></i>
+              <input type="text" id="new-username" placeholder="Enter new username" required />
+            </div>
+            <span class="field-note">Username must be unique and 3+ characters</span>
+          </div>
+          
+          <div id="username-message" class="form-message"></div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="showSettingsOptions()">Cancel</button>
+            <button type="submit" class="btn-save">Update Username</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Change Email Form -->
+      <div class="settings-form" id="email-form" style="display: none;">
+        <button class="back-button" onclick="showSettingsOptions()">
+          <i class="bx bx-arrow-back"></i> Back
+        </button>
+        
+        <h3 class="form-title">Change Email</h3>
+        
+        <form id="email-change-form">
+          <div class="profile-field">
+            <label for="current-email">Current Email</label>
+            <div class="input-group">
+              <i class="bx bx-envelope"></i>
+              <input type="email" id="current-email" readonly />
+            </div>
+          </div>
+          
+          <div class="profile-field">
+            <label for="new-email">New Email</label>
+            <div class="input-group">
+              <i class="bx bx-envelope"></i>
+              <input type="email" id="new-email" placeholder="Enter new email address" required />
+            </div>
+          </div>
+          
+          <div class="profile-field">
+            <label for="confirm-email-password">Confirm Password</label>
+            <div class="input-group">
+              <i class="bx bx-lock-alt"></i>
+              <input type="password" id="confirm-email-password" placeholder="Enter your password" required />
+              <i class="bx bx-hide toggle-modal-password" onclick="toggleModalPassword('confirm-email-password', this)"></i>
+            </div>
+            <span class="field-note">Enter your password to confirm changes</span>
+          </div>
+          
+          <div id="email-message" class="form-message"></div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="showSettingsOptions()">Cancel</button>
+            <button type="submit" class="btn-save">Update Email</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Change Password Form -->
+      <div class="settings-form" id="password-form" style="display: none;">
+        <button class="back-button" onclick="showSettingsOptions()">
+          <i class="bx bx-arrow-back"></i> Back
+        </button>
+        
+        <h3 class="form-title">Change Password</h3>
+        
+        <form id="password-change-form">
+          <div class="profile-field">
+            <label for="old-password">Current Password</label>
+            <div class="input-group">
+              <i class="bx bx-lock-alt"></i>
+              <input type="password" id="old-password" placeholder="Enter current password" required />
+              <i class="bx bx-hide toggle-modal-password" onclick="toggleModalPassword('old-password', this)"></i>
+            </div>
+            <a href="#" onclick="openForgotPasswordModal(); return false;" class="forgot-password-link">Forgot Password?</a>
+          </div>
+          
+          <div class="profile-field">
+            <label for="new-password">New Password</label>
+            <div class="input-group">
+              <i class="bx bx-lock-alt"></i>
+              <input type="password" id="new-password" placeholder="Enter new password" required />
+              <i class="bx bx-hide toggle-modal-password" onclick="toggleModalPassword('new-password', this)"></i>
+            </div>
+            <span class="field-note">Must be 8+ characters with at least 1 number</span>
+          </div>
+          
+          <div class="profile-field">
+            <label for="confirm-new-password">Confirm New Password</label>
+            <div class="input-group">
+              <i class="bx bx-lock-alt"></i>
+              <input type="password" id="confirm-new-password" placeholder="Confirm new password" required />
+              <i class="bx bx-hide toggle-modal-password" onclick="toggleModalPassword('confirm-new-password', this)"></i>
+            </div>
+          </div>
+          
+          <div id="password-message" class="form-message"></div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="showSettingsOptions()">Cancel</button>
+            <button type="submit" class="btn-save">Update Password</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+    <!-- Footer Contact Section -->
+    <footer class="footer-contact">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Get in Touch</h3>
+            <div class="contact-item">
+              <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                />
+                <path
+                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                />
+              </svg>
+              <a href="mailto:info@barberlink.com">info@barberlink.com</a>
+            </div>
+            <div class="contact-item">
+              <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+                />
+              </svg>
+              <a href="tel:+1234567890">+962 (79) 037-6083</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <div class="contact-item">
+              <a href="../BookingPage/index.html">Book Now</a>
+            </div>
+            <div class="contact-item">
+              <a href="#how-it-works">Shop Now</a>
+            </div>
+            <div class="contact-item">
+              <a href="../partnerPage/index.html">Be a Partner</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              />
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 BarberLink. All rights reserved. | Connecting barbers
+            with opportunities
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    </footer>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotPasswordOverlay" onclick="closeForgotPasswordModal()"></div>
+    <div class="forgot-password-modal" id="forgotPasswordModal">
+      <div class="modal-header">
+        <h3>Reset Password</h3>
+        <button class="close-modal-btn" onclick="closeForgotPasswordModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">Enter your email address and we'll send you a link to reset your password.</p>
+        <form id="forgot-password-form" onsubmit="handleForgotPassword(event)" novalidate>
+          <div class="profile-field">
+            <label for="forgot-email">Email</label>
+            <div class="input-group">
+              <i class="bx bx-envelope"></i>
+              <input type="email" id="forgot-email" placeholder="Enter your email" required />
+            </div>
+          </div>
+          <button type="submit" class="btn-save" style="width: 100%; margin-top: 20px;">Send Reset Link</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Password Reset Confirmation Alert -->
+    <div class="confirmation-overlay" id="confirmationOverlay" onclick="closeResetConfirmation()">
+      <div class="reset-confirmation-alert" id="resetConfirmationAlert">
+        <p class="reset-confirmation-text" id="resetConfirmationText">
+          Password reset link has been sent to your email
+        </p>
+        <button class="reset-confirmation-btn" onclick="event.stopPropagation(); closeResetConfirmation()">OK</button>
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

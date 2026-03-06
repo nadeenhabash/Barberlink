@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Log in & registration</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="nav">
+        <div class="nav-logo">
+          <a href="../HomePage/index.html">
+            <img src="imgs/barbericon.png" alt="Logo" />
+            <span class="logo-badge">HomePage</span>
+          </a>
+        </div>
+        
+        <!-- Menu Container -->
+        <div class="menu-container">
+          <div class="menu-dots" onclick="toggleMenu()">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="../HomePage/index.html" class="dropdown-item">Home</a>
+            <a href="../BookingPage/index.html" class="dropdown-item">Booking</a>
+            <a href="#" class="dropdown-item">Store</a>
+            <a href="../partnerPage/index.html" class="dropdown-item">Be a partner</a>
+            <a href="../jobsPage/index.html" class="dropdown-item">Jobs</a>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- FORM BOX -->
+      <div class="form-box">
+        <!-- Login Form -->
+        <div class="login-container" id="login">
+          <div class="top">
+            <header>Login</header>
+          </div>
+          
+          <form id="login-form" novalidate>
+            <div class="form-control">
+              <input type="text" id="login-username" required />
+              <label>
+                <span style="transition-delay:0ms">U</span>
+                <span style="transition-delay:50ms">s</span>
+                <span style="transition-delay:100ms">e</span>
+                <span style="transition-delay:150ms">r</span>
+                <span style="transition-delay:200ms">n</span>
+                <span style="transition-delay:250ms">a</span>
+                <span style="transition-delay:300ms">m</span>
+                <span style="transition-delay:350ms">e</span>
+                <span style="transition-delay:400ms"> </span>
+                <span style="transition-delay:450ms">o</span>
+                <span style="transition-delay:500ms">r</span>
+                <span style="transition-delay:550ms"> </span>
+                <span style="transition-delay:600ms">E</span>
+                <span style="transition-delay:650ms">m</span>
+                <span style="transition-delay:700ms">a</span>
+                <span style="transition-delay:750ms">i</span>
+                <span style="transition-delay:800ms">l</span>
+                <span style="transition-delay:850ms"> </span>
+                <span style="transition-delay:900ms">*</span>
+              </label>
+              <i class="bx bx-user"></i>
+            </div>
+            
+            <div class="form-control password-field">
+              <input type="password" id="login-password" required />
+              <label>
+                <span style="transition-delay:0ms">P</span>
+                <span style="transition-delay:50ms">a</span>
+                <span style="transition-delay:100ms">s</span>
+                <span style="transition-delay:150ms">s</span>
+                <span style="transition-delay:200ms">w</span>
+                <span style="transition-delay:250ms">o</span>
+                <span style="transition-delay:300ms">r</span>
+                <span style="transition-delay:350ms">d</span>
+                <span style="transition-delay:400ms"> </span>
+                <span style="transition-delay:450ms">*</span>
+              </label>
+              <i class="bx bx-lock-alt"></i>
+              <i class="bx bx-hide toggle-password" onclick="togglePasswordVisibility('login-password', this)"></i>
+            </div>
+            
+            <div class="input-box">
+              <button type="submit" class="submit">Log in</button>
+            </div>
+
+            <div class="two-col">
+              <div class="one">
+                <input type="checkbox" id="login-check" />
+                <label for="login-check">Remember Me</label>
+              </div>
+              <div class="two">
+                <a href="#" onclick="openForgotPasswordModal(); return false;" class="forgot-password">Forgot Password?</a>
+              </div>
+            </div>
+            
+            <div class="social-login-divider">
+              <span>or continue with</span>
+            </div>
+            
+            <div class="social-login-buttons">
+              <button type="button" class="social-btn google-btn" onclick="loginWithGoogle()" title="Continue with Google">
+                <i class='bx bxl-google'></i>
+              </button>
+              <button type="button" class="social-btn facebook-btn" onclick="loginWithFacebook()" title="Continue with Facebook">
+                <i class='bx bxl-facebook-circle'></i>
+              </button>
+              <button type="button" class="social-btn apple-btn" onclick="loginWithApple()" title="Continue with Apple">
+                <i class='bx bxl-apple'></i>
+              </button>
+            </div>
+            
+            <div class="bottom-signup-link">
+              <span>
+                Don't have an account?
+                <a href="#" onclick="event.preventDefault(); register();">Sign Up</a>
+              </span>
+            </div>
+            
+            
+          </form>
+        </div>
+        
+        <!-- Registration Form -->
+        <div class="register-container" id="register">
+          <div class="top">
+            <header>Sign Up</header>
+          </div>
+          
+          <form id="register-form" novalidate>
+            <div class="two-forms">
+              <div class="form-control">
+                <input type="text" id="register-firstname" required />
+                <label>
+                  <span style="transition-delay:0ms">F</span>
+                  <span style="transition-delay:50ms">i</span>
+                  <span style="transition-delay:100ms">r</span>
+                  <span style="transition-delay:150ms">s</span>
+                  <span style="transition-delay:200ms">t</span>
+                  <span style="transition-delay:250ms">n</span>
+                  <span style="transition-delay:300ms">a</span>
+                  <span style="transition-delay:350ms">m</span>
+                  <span style="transition-delay:400ms">e</span>
+                  <span style="transition-delay:450ms"> </span>
+                  <span style="transition-delay:500ms">*</span>
+                </label>
+                <i class="bx bx-user"></i>
+              </div>
+              
+              <div class="form-control">
+                <input type="text" id="register-lastname" required />
+                <label>
+                  <span style="transition-delay:0ms">L</span>
+                  <span style="transition-delay:50ms">a</span>
+                  <span style="transition-delay:100ms">s</span>
+                  <span style="transition-delay:150ms">t</span>
+                  <span style="transition-delay:200ms">n</span>
+                  <span style="transition-delay:250ms">a</span>
+                  <span style="transition-delay:300ms">m</span>
+                  <span style="transition-delay:350ms">e</span>
+                  <span style="transition-delay:400ms"> </span>
+                  <span style="transition-delay:450ms">*</span>
+                </label>
+                <i class="bx bx-user"></i>
+              </div>
+            </div>
+            
+            <div class="form-control">
+              <input type="email" id="register-email" required />
+              <label>
+                <span style="transition-delay:0ms">E</span>
+                <span style="transition-delay:50ms">m</span>
+                <span style="transition-delay:100ms">a</span>
+                <span style="transition-delay:150ms">i</span>
+                <span style="transition-delay:200ms">l</span>
+                <span style="transition-delay:250ms"> </span>
+                <span style="transition-delay:300ms">*</span>
+              </label>
+              <i class="bx bx-envelope"></i>
+            </div>
+            
+            <div class="form-control password-field">
+              <input type="password" id="register-password" required />
+              <label>
+                <span style="transition-delay:0ms">P</span>
+                <span style="transition-delay:50ms">a</span>
+                <span style="transition-delay:100ms">s</span>
+                <span style="transition-delay:150ms">s</span>
+                <span style="transition-delay:200ms">w</span>
+                <span style="transition-delay:250ms">o</span>
+                <span style="transition-delay:300ms">r</span>
+                <span style="transition-delay:350ms">d</span>
+                <span style="transition-delay:400ms"> </span>
+                <span style="transition-delay:450ms">*</span>
+              </label>
+              <i class="bx bx-lock-alt"></i>
+              <i class="bx bx-hide toggle-password" onclick="togglePasswordVisibility('register-password', this)"></i>
+              <div class="password-strength-bar">
+                <div class="password-strength-fill" id="password-strength-fill"></div>
+              </div>
+              <div class="password-strength-text" id="password-strength-text"></div>
+            </div>
+            
+            <div class="input-box">
+              <button type="submit" class="submit">Register</button>
+            </div>
+            <div class="two-col">
+              <div class="one">
+                <input type="checkbox" id="register-check" />
+                <label for="register-check">Remember Me</label>
+              </div>
+              <div class="one terms-agreement">
+                <input type="checkbox" id="terms-check" required />
+                <label for="terms-check">
+                  I agree to <a href="#" onclick="openTermsSidebar(); return false;">Terms & Conditions</a>
+                </label>
+              </div>
+            </div>
+            <div class="social-login-divider">
+              <span>or sign up with</span>
+            </div>
+            
+            <div class="social-login-buttons">
+              <button type="button" class="social-btn google-btn" onclick="signupWithGoogle()" title="Sign up with Google">
+                <i class='bx bxl-google'></i>
+              </button>
+              <button type="button" class="social-btn facebook-btn" onclick="signupWithFacebook()" title="Sign up with Facebook">
+                <i class='bx bxl-facebook-circle'></i>
+              </button>
+              <button type="button" class="social-btn apple-btn" onclick="signupWithApple()" title="Sign up with Apple">
+                <i class='bx bxl-apple'></i>
+              </button>
+            </div>
+            
+            <div class="bottom-signup-link">
+              <span>
+                Have an account?
+                <a href="#" onclick="event.preventDefault(); login();">Login</a>
+              </span>
+            </div>
+            
+            
+            
+            <div class="terms-agreement-wrapper">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Terms & Conditions Sidebar -->
+    <div class="terms-sidebar" id="termsSidebar">
+      <div class="terms-header">
+        <h2>Terms & Conditions</h2>
+        <button class="close-btn" onclick="closeTermsSidebar()">×</button>
+      </div>
+      <div class="terms-content">
+        <h3>1. Agreement to Terms</h3>
+        <p>By accessing and using the BarberLink platform, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must discontinue use of our services immediately.</p>
+        
+        <h3>2. Account Registration and Security</h3>
+        <p>You are solely responsible for maintaining the confidentiality of your account credentials, including your username and password. You agree to notify BarberLink immediately of any unauthorized access or security breach. You acknowledge that you are fully responsible for all activities conducted under your account.</p>
+        
+        <h3>3. Service Description and Modifications</h3>
+        <p>BarberLink provides a digital platform connecting barbering professionals with employment opportunities and clients. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time without prior notice. BarberLink shall not be held liable for any modifications or interruptions to the service.</p>
+        
+        <h3>4. User Conduct and Prohibited Activities</h3>
+        <p>You agree to use BarberLink services in accordance with all applicable laws and regulations. Prohibited activities include, but are not limited to: impersonation of others, distribution of malicious software, harassment of other users, unauthorized commercial solicitation, and any activity that disrupts or interferes with the platform's functionality.</p>
+        
+        <h3>5. Intellectual Property Rights</h3>
+        <p>All content, trademarks, service marks, logos, and intellectual property displayed on BarberLink are the exclusive property of BarberLink or its licensors. Unauthorized reproduction, modification, distribution, or commercial exploitation of any platform content is strictly prohibited and may result in legal action.</p>
+        
+        <h3>6. Privacy and Data Protection</h3>
+        <p>Your use of BarberLink is governed by our Privacy Policy, which is incorporated into these Terms and Conditions by reference. We collect, process, and store personal information in accordance with applicable data protection regulations. By using our services, you consent to such collection and processing as described in our Privacy Policy.</p>
+        
+        <h3>7. Limitation of Liability</h3>
+        <p>To the maximum extent permitted by law, BarberLink and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use or inability to use our services. This includes, without limitation, damages for loss of profits, data, or business opportunities, even if BarberLink has been advised of the possibility of such damages.</p>
+        
+        <h3>8. Indemnification</h3>
+        <p>You agree to indemnify, defend, and hold harmless BarberLink, its officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses, including reasonable legal fees, arising from your violation of these Terms and Conditions or your use of the platform.</p>
+        
+        <h3>9. Termination</h3>
+        <p>BarberLink reserves the right to terminate or suspend your account and access to services immediately, without prior notice or liability, for any reason, including but not limited to breach of these Terms and Conditions. All provisions which by their nature should survive termination shall remain in effect.</p>
+        
+        <h3>10. Governing Law and Dispute Resolution</h3>
+        <p>These Terms and Conditions shall be governed by and construed in accordance with applicable laws. Any disputes arising from these terms shall be resolved through binding arbitration in accordance with established arbitration rules, and you waive any right to participate in class action lawsuits.</p>
+        
+        <h3>11. Modifications to Terms</h3>
+        <p>BarberLink reserves the right to modify or replace these Terms and Conditions at any time at our sole discretion. We will provide notice of material changes by updating the "Last Modified" date. Your continued use of the platform following any modifications constitutes acceptance of the revised terms.</p>
+        
+        <h3>12. Contact Information</h3>
+        <p>For questions regarding these Terms and Conditions, please contact our legal department through the official support channels provided on the BarberLink platform. All formal notices must be submitted in writing to be considered valid.</p>
+        
+        <p style="margin-top: 30px; font-size: 0.85rem; color: #7f8c8d; font-style: italic;">Last Updated: November 21, 2025</p>
+      </div>
+      <div class="terms-footer">
+        <button class="accept-terms-btn" onclick="acceptTerms()">I Agree</button>
+      </div>
+    </div>
+    
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeTermsSidebar()"></div>
+    
+    <!-- Password Reset Confirmation Alert -->
+    <div class="confirmation-overlay" id="confirmationOverlay" onclick="closeResetConfirmation()">
+      <div class="reset-confirmation-alert" id="resetConfirmationAlert">
+        <p class="reset-confirmation-text" id="resetConfirmationText">
+          Password reset link has been sent to your email
+        </p>
+        <button class="reset-confirmation-btn" onclick="event.stopPropagation(); closeResetConfirmation()">OK</button>
+      </div>
+    </div>
+    
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotPasswordOverlay" onclick="closeForgotPasswordModal()"></div>
+    <div class="forgot-password-modal" id="forgotPasswordModal">
+      <div class="modal-header">
+        <h3>Reset Password</h3>
+        <button class="close-modal-btn" onclick="closeForgotPasswordModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">Enter your email address and we'll send you a link to reset your password.</p>
+        <form id="forgot-password-form" onsubmit="handleForgotPassword(event)" novalidate>
+          <div class="form-control">
+            <input type="email" id="forgot-email" required />
+            <label>
+              <span style="transition-delay:0ms">E</span>
+              <span style="transition-delay:50ms">m</span>
+              <span style="transition-delay:100ms">a</span>
+              <span style="transition-delay:150ms">i</span>
+              <span style="transition-delay:200ms">l</span>
+            </label>
+            <i class="bx bx-envelope"></i>
+          </div>
+          <button type="submit" class="submit modal-submit">Send Reset Link</button>
+        </form>
+      </div>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2025 BarberLink. All rights reserved. | Connecting barbers with opportunities</p>
+    </footer> 
+    
+    <script src="script.js"></script>
+  </body>
+</html>

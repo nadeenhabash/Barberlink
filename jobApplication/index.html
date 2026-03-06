@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barber Link</title>
+    <link href="https://fonts.cdnfonts.com/css/bugaki" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="#" class="back-arrow" onclick="goBack(); return false;">❮</a>
+      <a href="../HomePage/index.html" class="logo-link">
+        <img src="imgs/barbericon.png" alt="Barber Icon" class="barber-icon" />
+        <span class="logo-badge">HomePage</span>
+      </a>
+      <div class="header-content">
+        <h1>BARBER LINK</h1>
+        <h2>Fares Barber Shop</h2>
+        <p>Professional Barber<br />Amman, Jordan</p>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <button class="nav-item active" onclick="switchTab('overview')">
+        OVERVIEW
+      </button>
+      <button class="nav-item" onclick="switchTab('application')">
+        APPLICATION
+      </button>
+    </nav>
+
+    <main class="content">
+      <div id="overview" class="content-section active">
+        <h2 class="section-title">Description</h2>
+        <p class="section-text">
+          We're looking for a skilled and passionate Professional Barber to join
+          our team and deliver top-quality grooming services to our clients. As
+          a key member of our barbershop, you'll be responsible for creating
+          stylish, modern, and classic haircuts, providing expert shaves, and
+          ensuring every client leaves looking and feeling their best.
+        </p>
+
+        <h2 class="section-title">Key Responsibilities</h2>
+        <ul class="section-list">
+          <li>
+            Perform precision haircuts, fades, tapers, and beard grooming
+            services.
+          </li>
+          <li>
+            Offer hot towel shaves, hair styling, and finishing techniques.
+          </li>
+          <li>
+            Consult with clients to understand their desired look and recommend
+            suitable styles.
+          </li>
+          <li>
+            Maintain cleanliness and hygiene of tools, workstation, and overall
+            salon space.
+          </li>
+          <li>
+            Stay updated on the latest trends, techniques, and grooming
+            products.
+          </li>
+          <li>
+            Provide excellent customer service and build long-term client
+            relationships.
+          </li>
+        </ul>
+
+        <h2 class="section-title">Qualifications & Skills</h2>
+        <ul class="section-list">
+          <li>Proven experience as a barber or men's grooming specialist.</li>
+          <li>Proficiency in clipper, scissor, and razor techniques.</li>
+          <li>Strong understanding of different hair types and face shapes.</li>
+          <li>Excellent communication and customer service skills.</li>
+          <li>Professional barber license or certification (if applicable).</li>
+        </ul>
+
+        <h2 class="section-title">What We Offer</h2>
+        <ul class="section-list">
+          <li>Competitive pay with tips and commission opportunities.</li>
+          <li>Supportive team environment with ongoing training.</li>
+          <li>Modern, fully equipped workspace.</li>
+          <li>Opportunities for career growth and development.</li>
+        </ul>
+
+        <button class="apply-button" onclick="switchTab('application')">
+          Apply for this job
+        </button>
+      </div>
+
+      <div id="application" class="content-section">
+        <p class="required-note">* Required fields</p>
+
+        <div class="form-header">
+          <h2 class="form-title">Personal information</h2>
+          <button type="button" class="clear-button" onclick="clearForm()">
+            Clear
+          </button>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">
+              <span class="required">*</span> First name
+            </label>
+            <input
+              type="text"
+              class="form-input"
+              id="firstName"
+              required
+              autocomplete="given-name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">
+              <span class="required">*</span> Last name
+            </label>
+            <input
+              type="text"
+              class="form-input"
+              id="lastName"
+              required
+              autocomplete="family-name"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span class="required">*</span> Email
+          </label>
+          <input
+            type="email"
+            class="form-input"
+            id="email"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Headline <span class="optional">(Optional)</span>
+          </label>
+          <input
+            type="text"
+            class="form-input"
+            id="headline"
+            autocomplete="organization-title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span class="required">*</span> Phone
+          </label>
+          <div class="phone-group">
+            <select class="country-code" id="countryCode">
+              <option value="+962">🇯🇴 +962</option>
+            </select>
+            <input
+              type="tel"
+              class="form-input phone-input"
+              id="phone"
+              autocomplete="tel-national"
+            />
+          </div>
+          <p class="form-hint">
+            The hiring team may use this number to contact you about this job.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span class="required">*</span> Address
+          </label>
+          <div class="address-input-wrapper">
+            <input
+              type="text"
+              class="form-input"
+              id="address"
+              required
+              autocomplete="street-address"
+            />
+            <button type="button" class="map-button" onclick="openMapPicker()">
+              📍 Set on Map
+            </button>
+          </div>
+          <p class="form-hint">
+            Include your city, region, and country, so that employers can easily
+            manage your application.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <div class="label-with-clear">
+            <label class="form-label">
+              <span class="required">*</span> Photo
+            </label>
+            <button
+              type="button"
+              class="clear-button clear-button-small"
+              onclick="clearPhoto(); event.stopPropagation();"
+            >
+              Clear
+            </button>
+          </div>
+          <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            style="display: none"
+            onchange="handleFileUpload(event, 'uploadText', true)"
+          />
+          <div
+            class="upload-area"
+            id="uploadArea"
+            onclick="document.getElementById('photoInput').click()"
+          >
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+            </div>
+            <p class="upload-text" id="uploadText">
+              <span class="upload-link">Upload a file</span> or drag and drop
+              here
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span class="required">*</span> Nationality
+          </label>
+          <input
+            type="text"
+            class="form-input"
+            id="nationality"
+            required
+            autocomplete="country-name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Summary <span class="optional">(Optional)</span>
+          </label>
+          <textarea
+            class="form-input"
+            id="summary"
+            rows="4"
+            style="resize: vertical"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="label-with-clear">
+            <label class="form-label">
+              <span class="required">*</span> Resume
+            </label>
+            <button
+              type="button"
+              class="clear-button clear-button-small"
+              onclick="clearResume(); event.stopPropagation();"
+            >
+              Clear
+            </button>
+          </div>
+          <input
+            type="file"
+            id="resumeInput"
+            accept=".pdf,.doc,.docx"
+            style="display: none"
+            onchange="handleFileUpload(event, 'resumeText', false)"
+          />
+          <div
+            class="upload-area"
+            onclick="document.getElementById('resumeInput').click()"
+          >
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+                  fill="#4caf50"
+                />
+              </svg>
+            </div>
+            <p class="upload-text" id="resumeText">
+              <span class="upload-link">Upload a file</span> or drag and drop
+              here
+            </p>
+          </div>
+        </div>
+
+        <div class="form-header" style="margin-top: 50px">
+          <h2 class="form-title">Details</h2>
+          <button type="button" class="clear-button" onclick="clearDetails()">
+            Clear
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            Cover letter <span class="optional">(Optional)</span>
+          </label>
+          <textarea
+            class="form-input"
+            id="coverLetter"
+            rows="6"
+            style="resize: vertical"
+          ></textarea>
+        </div>
+
+        <button class="apply-button" onclick="submitApplication()">
+          Submit application
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>
+        © 2025 BarberLink. All rights reserved. | Connecting barbers with
+        opportunities
+      </p>
+    </footer>
+
+    <script src="jobs-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+const jobsData = {
+  barber: {
+    title: "BARBER LINK",
+    shopName: "Fares Barber Shop",
+    position: "Professional Barber",
+    location: "Amman, Jordan",
+    description:
+      "We're looking for a skilled and passionate Professional Barber to join our team and deliver top-quality grooming services to our clients. As a key member of our barbershop, you'll be responsible for creating stylish, modern, and classic haircuts, providing expert shaves, and ensuring every client leaves looking and feeling their best.",
+    responsibilities: [
+      "Perform precision haircuts, fades, tapers, and beard grooming services.",
+      "Offer hot towel shaves, hair styling, and finishing techniques.",
+      "Consult with clients to understand their desired look and recommend suitable styles.",
+      "Maintain cleanliness and hygiene of tools, workstation, and overall salon space.",
+      "Stay updated on the latest trends, techniques, and grooming products.",
+      "Provide excellent customer service and build long-term client relationships.",
+    ],
+    qualifications: [
+      "Proven experience as a barber or men's grooming specialist.",
+      "Proficiency in clipper, scissor, and razor techniques.",
+      "Strong understanding of different hair types and face shapes.",
+      "Excellent communication and customer service skills.",
+      "Professional barber license or certification (if applicable).",
+    ],
+    offers: [
+      "Competitive pay with tips and commission opportunities.",
+      "Supportive team environment with ongoing training.",
+      "Modern, fully equipped workspace.",
+      "Opportunities for career growth and development.",
+    ],
+  },
+
+  "salon-manager": {
+    title: "BARBER LINK",
+    shopName: "Capri Salon Barbershop",
+    position: "Social Media Manager",
+    location: "Amman, Jordan",
+    description:
+      "We are seeking a Salon Manager to lead our barbershop team, ensure smooth day-to-day operations, and create an exceptional client experience. The Salon Manager will oversee staff, scheduling, inventory, and customer service while supporting the growth and success of the shop.",
+    responsibilities: [
+      "Manage daily operations to ensure the barbershop runs efficiently and professionally.",
+      "Supervise barbers, receptionists, and support staff, fostering a positive and motivated work environment.",
+      "Create and manage staff schedules, ensuring adequate coverage for appointments.",
+      "Handle customer inquiries, feedback, and conflict resolution to maintain client satisfaction.",
+      "Oversee inventory of barber tools, grooming products, and supplies; manage ordering and stock levels.",
+      "Collaborate with the marketing team to promote services, special offers, and events.",
+      "Maintain health and safety standards and ensure compliance with local regulations.",
+      "Track sales performance, service quality, and customer retention to achieve business goals.",
+    ],
+    qualifications: [
+      "Proven experience as a salon, spa, or barbershop manager (or similar leadership role).",
+      "Strong organizational and multitasking skills.",
+      "Excellent leadership, team management, and communication abilities.",
+      "Knowledge of barbershop services, tools, and trends is preferred.",
+      "Basic understanding of scheduling software and POS systems.",
+    ],
+    offers: [
+      "Competitive salary with performance incentives.",
+      "Supportive and dynamic work environment.",
+      "Opportunities for professional growth and training.",
+      "Discounts on grooming services and products.",
+    ],
+  },
+
+  "social-media-manager-shanab": {
+    title: "BARBER LINK",
+    shopName: "Shanab Barber Shop",
+    position: "Social Media Manager",
+    location: "Zarqa, Jordan",
+    description:
+      "We are looking for a creative and results-driven Social Media Manager to build our barbershop's online presence and engage with our community across all digital platforms. The ideal candidate will be passionate about content creation, marketing trends, and growing brand visibility while showcasing our services and culture.",
+    responsibilities: [
+      "Develop and implement a social media strategy to increase brand awareness and customer engagement.",
+      "Create high-quality, engaging content including photos, videos, reels, and stories highlighting our barbershop services, staff, and customer experiences.",
+      "Manage social media accounts across platforms such as Instagram, Facebook, TikTok, and YouTube.",
+      "Respond to comments, messages, and reviews in a timely and professional manner.",
+      "Run paid advertising campaigns to promote services, special offers, and events.",
+      "Analyze performance metrics, prepare reports, and adjust strategies to optimize growth and engagement.",
+      "Collaborate with barbers and management to create promotional materials and coordinate marketing campaigns.",
+      "Stay up-to-date with the latest trends, tools, and best practices in social media marketing.",
+    ],
+    qualifications: [
+      "Proven experience as a Social Media Manager, Digital Marketer, or similar role.",
+      "Strong knowledge of major social media platforms and content creation tools.",
+      "Basic graphic design and video editing skills (Canva, CapCut, or similar).",
+      "Excellent communication, creativity, and time-management skills.",
+      "Understanding of branding, online advertising, and audience engagement strategies.",
+    ],
+    offers: [
+      "Competitive pay with performance bonuses.",
+      "A fun, creative, and supportive work environment.",
+      "Opportunities for growth within a growing barbershop brand.",
+      "Flexible scheduling options.",
+    ],
+  },
+
+  "beard-specialist": {
+    title: "BARBER LINK",
+    shopName: "Shabab Barber Shop",
+    position: "Beard & Grooming Specialist",
+    location: "Zarqa, Jordan",
+    description:
+      "We are seeking a skilled Beard & Grooming Specialist to join our team and deliver top-quality beard care and grooming services to our clients. This role focuses on precision, style, and customer satisfaction, ensuring each client leaves with a sharp, confident look.",
+    responsibilities: [
+      "Provide expert beard trims, shaping, and styling tailored to client preferences.",
+      "Perform luxury grooming services such as hot towel treatments and straight razor shaves.",
+      "Consult with clients to recommend beard care routines and suitable grooming products.",
+      "Maintain a high standard of hygiene and sanitation for all tools and workstations.",
+      "Stay updated on the latest beard trends, techniques, and grooming products.",
+      "Educate clients about at-home grooming practices and product usage for beard care.",
+      "Collaborate with the team to deliver an exceptional overall customer experience.",
+    ],
+    qualifications: [
+      "Proven experience as a barber or beard specialist.",
+      "Proficiency in straight razor techniques, trimming, and styling.",
+      "Strong attention to detail and a passion for grooming and men's style.",
+      "Excellent customer service and communication skills.",
+      "Knowledge of various beard types, growth patterns, and product applications.",
+      "Barber license or relevant certification (if applicable).",
+    ],
+    offers: [
+      "Competitive pay with commission opportunities.",
+      "Access to high-quality grooming tools and products.",
+      "Ongoing training to learn advanced beard care techniques.",
+      "A supportive and creative work environment.",
+    ],
+  },
+
+  "customer-experience": {
+    title: "BARBER LINK",
+    shopName: "Mr Black barbershop",
+    position: "Customer Experience Associate",
+    location: "Zarqa, Jordan",
+    description:
+      "We're looking for a friendly, energetic Customer Experience Associate to be the face of our barbershop. This role is all about creating a welcoming atmosphere, ensuring clients have a smooth, enjoyable experience from the moment they book an appointment to the time they leave looking their best.",
+    responsibilities: [
+      "Greet clients warmly as they enter the barbershop and assist with check-ins.",
+      "Manage appointments, scheduling, walk-ins, and client inquiries efficiently.",
+      "Provide information about services, pricing, and available barbers.",
+      "Handle customer feedback and resolve any concerns professionally.",
+      "Support promotional activities, loyalty programs, and special offers.",
+      "Assist with retail product sales by recommending grooming products and tools.",
+      "Maintain a clean, organized, and inviting reception area.",
+      "Collaborate with barbers and management to ensure a seamless client experience.",
+    ],
+    qualifications: [
+      "Previous experience in customer service, hospitality, or salon front desk is a plus.",
+      "Strong communication and interpersonal skills.",
+      "Friendly, approachable, and professional demeanor.",
+      "Ability to multitask and handle busy periods efficiently.",
+      "Basic knowledge of appointment scheduling software (training provided).",
+      "Passion for the grooming or beauty industry is a bonus.",
+    ],
+    offers: [
+      "Competitive hourly pay with potential bonuses.",
+      "A fun, team-oriented work environment.",
+      "Opportunities for career growth within the barbershop.",
+      "Discounts on grooming services and retail products.",
+    ],
+  },
+
+  "marketing-specialist": {
+    title: "BARBER LINK",
+    shopName: "O&M Barber Shop",
+    position: "Marketing & Promotions Specialist",
+    location: "Amman, Jordan",
+    description:
+      "We are looking for a creative and results-driven Marketing & Promotions Specialist to help grow our barbershop's brand, attract new clients, and keep our community engaged. This role focuses on creating effective marketing campaigns, organizing promotions, and ensuring our services reach the right audience.",
+    responsibilities: [
+      "Plan and execute marketing campaigns to promote services, special offers, and events.",
+      "Design promotional materials for in-store and online use, including flyers, social media posts, and email newsletters.",
+      "Collaborate with the Social Media Manager to create engaging content across digital platforms.",
+      "Develop partnerships with local businesses and influencers for cross-promotions.",
+      "Track campaign performance and analyze results to improve future marketing efforts.",
+      "Organize special events like grooming workshops, holiday promotions, or customer appreciation days.",
+      "Stay updated on the latest marketing trends and competitor activities in the grooming and salon industry.",
+      "Manage promotional budgets and ensure cost-effective campaigns.",
+    ],
+    qualifications: [
+      "Experience in marketing, promotions, or related fields.",
+      "Knowledge of digital marketing, SEO basics, and social media advertising.",
+      "Strong organizational and communication skills.",
+      "Ability to work collaboratively with barbers, management, and other team members.",
+      "Passion for the grooming, fashion, or beauty industry is a bonus.",
+    ],
+    offers: [
+      "Competitive salary with performance-based incentives.",
+      "Opportunities to bring your creative ideas to life.",
+      "Professional growth in marketing and brand promotion.",
+      "A friendly, dynamic, and supportive work environment.",
+    ],
+  },
+};

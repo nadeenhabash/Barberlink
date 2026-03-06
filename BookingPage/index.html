@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Your Appointment</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vina+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Boxicons for profile/settings icons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- Left Menu -->
+        <ul class="nav-menu">
+          <li><a href="../HomePage/index.html" class="nav-link">HOME</a></li>
+          <li><a href="#" class="nav-link">SHOP</a></li>
+          <li><a href="../jobsPage/index.html" class="nav-link">JOBS</a></li>
+          <li><a href="../BookingPage/index.html" class="nav-link active">BOOKING</a></li>
+        </ul>
+
+        <!-- Right Actions -->
+        <div class="nav-actions">
+          <!-- Favorites Icon -->
+          <div class="favorites-icon-wrapper" id="favoritesIconWrapper">
+            <button
+              class="favorites-icon-btn"
+              id="favoritesIconBtn"
+              onclick="toggleFavoritesPanel()"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                ></path>
+              </svg>
+              <span class="favorites-count hidden" id="favoritesCount">0</span>
+            </button>
+
+            <!-- Favorites Panel -->
+            <div class="favorites-panel" id="favoritesPanel">
+              <div class="favorites-panel-header">
+                <h3>Favorite Shops</h3>
+                <div class="buttons-area">
+                  <div class="selection-mode-buttons" id="selectionModeButtons">
+                    <button
+                      class="cancel-selection-btn"
+                      onclick="exitSelectionMode()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      class="delete-selected-btn"
+                      id="deleteSelectedBtn"
+                      onclick="deleteSelected()"
+                      disabled
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <button
+                    class="select-mode-btn"
+                    id="selectModeBtn"
+                    onclick="enterSelectionMode()"
+                  >
+                    Select
+                  </button>
+                  <button
+                    class="close-favorites"
+                    onclick="toggleFavoritesPanel()"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+              <div class="select-all-checkbox" id="selectAllCheckbox">
+                <input
+                  type="checkbox"
+                  id="selectAllInput"
+                  onchange="toggleSelectAll()"
+                />
+                <label for="selectAllInput">Select All</label>
+              </div>
+              <div class="favorites-list" id="favoritesList">
+                <p class="no-favorites">No favorites yet</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Profile (Shown when logged in) -->
+          <div class="user-profile" id="userProfile" style="display: none">
+            <div class="avatar-circle" id="userAvatar">U</div>
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-info">
+                <p class="profile-name" id="profileName">User Name</p>
+                <p class="profile-email" id="profileEmail">
+                  <a
+                    href="/cdn-cgi/l/email-protection"
+                    class="__cf_email__"
+                    data-cfemail="2e5b5d4b5c6e4b564f435e424b004d4143"
+                    >[email&#160;protected]</a
+                  >
+                </p>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-link">Profile Settings</a>
+              <a href="#" class="dropdown-link">My Bookings</a>
+              <a href="#" class="dropdown-link" id="logoutBtn">Logout</a>
+            </div>
+          </div>
+
+          <!-- Login Button (Shown when not logged in) -->
+          <a
+            href="../Signup-login/index.html?returnUrl=booking"
+            class="login-btn"
+            id="loginBtn"
+            style="display: none"
+            >LOGIN</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+      <div class="booking-container">
+        <div class="booking-background-text">BOOK A CUT</div>
+        <h2 class="booking-foreground-text">WANT TO BOOK A CUT?</h2>
+        <div class="cta-container">
+          <button
+            class="cta"
+            onclick="document.querySelector('.search-filter-section').scrollIntoView({ behavior: 'smooth' })"
+          >
+            <span class="hover-underline-animation"> view all shops </span>
+            <svg
+              id="arrow-horizontal"
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="10"
+              viewBox="0 0 46 16"
+            >
+              <path
+                id="Path_10"
+                data-name="Path 10"
+                d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                transform="translate(30)"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <section class="carousel-section">
+        <div class="carousel-content">
+          <div class="carousel-header">
+            <h2 class="carousel-title">Captured Work<br />You Can Trust</h2>
+            <div class="carousel-progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+
+          <div class="carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" id="prevBtn">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div class="carousel-wrapper">
+              <div class="carousel-track" id="carouselTrack">
+                <!-- Image 1 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments1.jpg"
+                      alt="Happy moment 1"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Capri Barbershop</div>
+                  </div>
+                </div>
+                <!-- Image 2 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments2.jpg"
+                      alt="Happy moment 2"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Shanab Barbershop</div>
+                  </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments3.png"
+                      alt="Happy moment 3"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Mr Black Barbershop</div>
+                  </div>
+                </div>
+                <!-- Image 4 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments4.jpg"
+                      alt="Happy moment 4"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Zaater Cuts</div>
+                  </div>
+                </div>
+                <!-- Image 5 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments5.jpg"
+                      alt="Happy moment 5"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Sultan Barbershop</div>
+                  </div>
+                </div>
+                <!-- Image 6 -->
+                <div class="carousel-slide">
+                  <div class="carousel-image-wrapper">
+                    <img
+                      src="imgs/moments6.jpg"
+                      alt="Happy moment 6"
+                      class="carousel-image"
+                    />
+                    <div class="carousel-tooltip">Ahmad Barbershop</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-arrow carousel-arrow-right" id="nextBtn">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Search and Filter Section -->
+      <div class="search-filter-section">
+        <!-- Search Bar -->
+        <div class="search-container">
+          <div class="form">
+            <button type="button" onclick="performSearch()">
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 17A8 8 0 109 1a8 8 0 000 16zM19 19l-4.35-4.35"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <input
+              class="input"
+              placeholder="Search for barbershops..."
+              id="searchInput"
+              type="text"
+              oninput="filterBranches()"
+              autocomplete="off"
+            />
+            <button class="reset" type="button" onclick="resetSearch()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            <div class="suggestions" id="suggestions"></div>
+          </div>
+
+          <!-- Sort Icon Button -->
+          <div class="sort-icon-wrapper">
+            <button
+              class="sort-icon-btn"
+              id="sortIconBtn"
+              onclick="toggleSortIconDropdown()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <circle cx="8" cy="6" r="2"></circle>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <circle cx="14" cy="12" r="2"></circle>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+                <circle cx="10" cy="18" r="2"></circle>
+              </svg>
+            </button>
+            <div class="sort-icon-dropdown" id="sortIconDropdown">
+              <div
+                class="sort-icon-option selected"
+                data-value="default"
+                onclick="selectSortIconOption('default', 'Default')"
+              >
+                Default
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="rating-high"
+                onclick="selectSortIconOption('rating-high', 'Highest Rated')"
+              >
+                Highest Rated
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="rating-low"
+                onclick="selectSortIconOption('rating-low', 'Lowest Rated')"
+              >
+                Lowest Rated
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="reviews-high"
+                onclick="selectSortIconOption('reviews-high', 'Price: Low to High')"
+              >
+                Price: Low to High
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="reviews-low"
+                onclick="selectSortIconOption('reviews-low', 'Price: High to Low')"
+              >
+                Price: High to Low
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="name-asc"
+                onclick="selectSortIconOption('name-asc', 'Name (A-Z)')"
+              >
+                Name (A-Z)
+              </div>
+              <div
+                class="sort-icon-option"
+                data-value="name-desc"
+                onclick="selectSortIconOption('name-desc', 'Name (Z-A)')"
+              >
+                Name (Z-A)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <button
+            class="filter-btn active"
+            id="allBtn"
+            onclick="selectFilter('all')"
+          >
+            All Branches
+          </button>
+          <button
+            class="filter-btn"
+            id="ammanBtn"
+            onclick="selectFilter('amman')"
+          >
+            Amman
+          </button>
+          <button
+            class="filter-btn"
+            id="zarqaBtn"
+            onclick="selectFilter('zarqa')"
+          >
+            Zarqa
+          </button>
+        </div>
+      </div>
+
+      <!-- Shop Cards Section -->
+      <section class="shops-section">
+        <div class="container">
+          <div class="shops-grid" id="shopsGrid">
+            <!-- Card 1 - Fares Barbershop -->
+            <div class="shop-card" data-id="1" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/faresshop.png" alt="Fares Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Fares Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Abdoun Circle, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(127)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2 - Capri Barbershop -->
+            <div class="shop-card" data-id="2" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/caprishop.png" alt="Capri Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Capri Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Swefieh, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">4.0</span>
+                    <span class="rating-count">(89)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3 - O&M Barbershop -->
+            <div class="shop-card" data-id="3" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/o&mshop.png" alt="O&M Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">O&M Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Shmeisani, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(203)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 4 - Shanab Barbershop -->
+            <div class="shop-card" data-id="4" data-city="zarqa">
+              <div class="card-image">
+                <img src="imgs/shanabshop.png" alt="Shanab Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Shanab Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  New Zarqa, Zarqa
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">4.0</span>
+                    <span class="rating-count">(56)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 5 - Shabab Barbershop -->
+            <div class="shop-card" data-id="5" data-city="zarqa">
+              <div class="card-image">
+                <img src="imgs/shababshop.png" alt="Shabab Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Shabab Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Al Hashmi Street, Zarqa
+                  <div class="price-range">
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span
+                    ><span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">3.0</span>
+                    <span class="rating-count">(34)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 6 - Mr Black Barbershop -->
+            <div class="shop-card" data-id="6" data-city="zarqa">
+              <div class="card-image">
+                <img src="imgs/mrblackshop.png" alt="Mr Black Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Mr Black Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Jabal Tareq, Zarqa
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(178)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 7 - Ahmad Barbershop -->
+            <div class="shop-card" data-id="7" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/ahmadshop.png" alt="Ahmad Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Ahmad Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Dabouq, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">4.0</span>
+                    <span class="rating-count">(92)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 8 - Zaater Cuts -->
+            <div class="shop-card" data-id="8" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/zataarshop.png" alt="Zaater Cuts" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Zaater Cuts</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Rabieh, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(156)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 9 - Halawani Barbershop -->
+            <div class="shop-card" data-id="9" data-city="zarqa">
+              <div class="card-image">
+                <img src="imgs/jabalshop.png" alt="Halawani Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Halawani Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Al Jabal Al Abyad, Zarqa
+                  <div class="price-range">
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span
+                    ><span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">4.0</span>
+                    <span class="rating-count">(73)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 10 - Sultan Barbershop -->
+            <div class="shop-card" data-id="10" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/sultanshop.png" alt="Sultan Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Sultan Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Jubeiha, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(142)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 11 - Zak Barbershop -->
+            <div class="shop-card" data-id="11" data-city="zarqa">
+              <div class="card-image">
+                <img src="imgs/zakshop.png" alt="Zak Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Zak Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Makka Al Mokarameh, Zarqa
+                  <div class="price-range">
+                    <span class="price-symbol">$</span
+                    ><span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star empty" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">4.0</span>
+                    <span class="rating-count">(67)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 12 - Khaled Barbershop -->
+            <div class="shop-card" data-id="12" data-city="amman">
+              <div class="card-image">
+                <img src="imgs/khaledshop.png" alt="Khaled Barbershop" />
+                <button
+                  class="favorite-btn"
+                  onclick="toggleFavorite(this.closest('.shop-card').dataset.id, event)"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#191265"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-content">
+                <h3 class="shop-name">Khaled Barbershop</h3>
+                <div class="shop-location">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#777"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Jabal Al Weibdeh, Amman
+                  <div class="price-range">
+                    <span class="price-symbol">$</span>
+                    <span class="price-symbol inactive">$</span
+                    ><span class="price-symbol inactive">$</span>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="rating-container">
+                  <div class="stars">
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <svg class="star filled" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="rating-info">
+                    <span class="rating-number">5.0</span>
+                    <span class="rating-count">(198)</span>
+                  </div>
+                </div>
+                <button class="book-btn">
+                  <span>Book Now</span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-modal-overlay" id="quizModalOverlay">
+      <div class="quiz-container">
+        <!-- Close Button -->
+        <button class="quiz-close-btn" onclick="closeQuizModal()">×</button>
+
+        <!-- Header -->
+        <div class="quiz-header">
+          <div class="header-glow"></div>
+          <h1 class="quiz-title">Find Your Perfect Match</h1>
+          <p class="quiz-subtitle">Let's discover your ideal barbershop</p>
+          <div class="progress-container">
+            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+          </div>
+          <div class="quiz-progress-text" id="quizProgressText">
+            Question 1 of 5
+          </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="quiz-chat-area" id="quizChatArea">
+          <div class="chat-bubble bubble-bot">
+            <div class="bubble-text">
+              Welcome! Let's find the perfect barbershop for you.
+            </div>
+            <div class="bubble-label">BarberLink</div>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <div class="bubble-text">
+              Answer 5 quick questions and we'll match you with the best shops.
+            </div>
+            <div class="bubble-label">BarberLink</div>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <div class="bubble-text">What's your hair type?</div>
+            <div class="bubble-label">BarberLink</div>
+          </div>
+        </div>
+
+        <!-- Options Area -->
+        <div class="quiz-options-area" id="quizOptionsArea">
+          <div class="quiz-options-row">
+            <button
+              class="quiz-option-btn"
+              onclick="quizSelectAnswer('Straight Hair', 'straight')"
+            >
+              <span>Straight Hair</span>
+            </button>
+            <button
+              class="quiz-option-btn"
+              onclick="quizSelectAnswer('Wavy Hair', 'wavy')"
+            >
+              <span>Wavy Hair</span>
+            </button>
+          </div>
+          <div class="quiz-options-row">
+            <button
+              class="quiz-option-btn"
+              onclick="quizSelectAnswer('Curly Hair', 'curly')"
+            >
+              <span>Curly Hair</span>
+            </button>
+            <button
+              class="quiz-option-btn"
+              onclick="quizSelectAnswer('Coily/Thick Hair', 'coily')"
+            >
+              <span>Coily/Thick Hair</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="quiz-results-screen" id="quizResultsScreen">
+          <h2 class="quiz-results-title">Finding Your Matches</h2>
+          <p class="quiz-results-subtitle">Analyzing your preferences...</p>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <div class="progress-percentage" id="progressPercentage">0%</div>
+          <p class="progress-status" id="progressStatus">Starting...</p>
+
+          <button
+            class="retake-quiz-btn"
+            id="retakeQuizBtn"
+            onclick="restartQuiz()"
+            style="display: none"
+          >
+            Retake Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Settings Modal -->
+    <div class="modal-overlay" id="profileModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2>Profile Settings</h2>
+          <i class="bx bx-x close-modal" onclick="closeProfileModal()"></i>
+        </div>
+
+        <div class="modal-body">
+          <!-- Settings Options -->
+          <div class="settings-options">
+            <div class="settings-option" onclick="showSettingForm('username')">
+              <i class="bx bx-user-circle"></i>
+              <div class="option-text">
+                <h3>Change Username</h3>
+                <p>Update your username</p>
+              </div>
+              <i class="bx bx-chevron-right"></i>
+            </div>
+
+            <div class="settings-option" onclick="showSettingForm('email')">
+              <i class="bx bx-envelope"></i>
+              <div class="option-text">
+                <h3>Change Email</h3>
+                <p>Update your email address</p>
+              </div>
+              <i class="bx bx-chevron-right"></i>
+            </div>
+
+            <div class="settings-option" onclick="showSettingForm('password')">
+              <i class="bx bx-lock-alt"></i>
+              <div class="option-text">
+                <h3>Change Password</h3>
+                <p>Update your password</p>
+              </div>
+              <i class="bx bx-chevron-right"></i>
+            </div>
+          </div>
+
+          <!-- Change Username Form -->
+          <div class="settings-form" id="username-form" style="display: none">
+            <button class="back-button" onclick="showSettingsOptions()">
+              <i class="bx bx-arrow-back"></i> Back
+            </button>
+
+            <h3 class="form-title">Change Username</h3>
+
+            <form id="username-change-form">
+              <div class="profile-field">
+                <label for="current-username">Current Username</label>
+                <div class="input-group">
+                  <i class="bx bx-user-circle"></i>
+                  <input type="text" id="current-username" readonly />
+                </div>
+              </div>
+
+              <div class="profile-field">
+                <label for="new-username">New Username</label>
+                <div class="input-group">
+                  <i class="bx bx-user-circle"></i>
+                  <input
+                    type="text"
+                    id="new-username"
+                    placeholder="Enter new username"
+                    required
+                  />
+                </div>
+                <span class="field-note"
+                  >Username must be unique and 3+ characters</span
+                >
+              </div>
+
+              <div id="username-message" class="form-message"></div>
+
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="btn-cancel"
+                  onclick="showSettingsOptions()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn-save">Update Username</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Change Email Form -->
+          <div class="settings-form" id="email-form" style="display: none">
+            <button class="back-button" onclick="showSettingsOptions()">
+              <i class="bx bx-arrow-back"></i> Back
+            </button>
+
+            <h3 class="form-title">Change Email</h3>
+
+            <form id="email-change-form">
+              <div class="profile-field">
+                <label for="current-email">Current Email</label>
+                <div class="input-group">
+                  <i class="bx bx-envelope"></i>
+                  <input type="email" id="current-email" readonly />
+                </div>
+              </div>
+
+              <div class="profile-field">
+                <label for="new-email">New Email</label>
+                <div class="input-group">
+                  <i class="bx bx-envelope"></i>
+                  <input
+                    type="email"
+                    id="new-email"
+                    placeholder="Enter new email address"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="profile-field">
+                <label for="confirm-email-password">Confirm Password</label>
+                <div class="input-group">
+                  <i class="bx bx-lock-alt"></i>
+                  <input
+                    type="password"
+                    id="confirm-email-password"
+                    placeholder="Enter your password"
+                    required
+                  />
+                  <i
+                    class="bx bx-hide toggle-modal-password"
+                    onclick="toggleModalPassword('confirm-email-password', this)"
+                  ></i>
+                </div>
+                <span class="field-note"
+                  >Enter your password to confirm changes</span
+                >
+              </div>
+
+              <div id="email-message" class="form-message"></div>
+
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="btn-cancel"
+                  onclick="showSettingsOptions()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn-save">Update Email</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Change Password Form -->
+          <div class="settings-form" id="password-form" style="display: none">
+            <button class="back-button" onclick="showSettingsOptions()">
+              <i class="bx bx-arrow-back"></i> Back
+            </button>
+
+            <h3 class="form-title">Change Password</h3>
+
+            <form id="password-change-form">
+              <div class="profile-field">
+                <label for="old-password">Current Password</label>
+                <div class="input-group">
+                  <i class="bx bx-lock-alt"></i>
+                  <input
+                    type="password"
+                    id="old-password"
+                    placeholder="Enter current password"
+                    required
+                  />
+                  <i
+                    class="bx bx-hide toggle-modal-password"
+                    onclick="toggleModalPassword('old-password', this)"
+                  ></i>
+                </div>
+                <a
+                  href="#"
+                  onclick="openForgotPasswordModal(); return false;"
+                  class="forgot-password-link"
+                  >Forgot Password?</a
+                >
+              </div>
+
+              <div class="profile-field">
+                <label for="new-password">New Password</label>
+                <div class="input-group">
+                  <i class="bx bx-lock-alt"></i>
+                  <input
+                    type="password"
+                    id="new-password"
+                    placeholder="Enter new password"
+                    required
+                  />
+                  <i
+                    class="bx bx-hide toggle-modal-password"
+                    onclick="toggleModalPassword('new-password', this)"
+                  ></i>
+                </div>
+                <span class="field-note"
+                  >Must be 8+ characters with at least 1 number</span
+                >
+              </div>
+
+              <div class="profile-field">
+                <label for="confirm-new-password">Confirm New Password</label>
+                <div class="input-group">
+                  <i class="bx bx-lock-alt"></i>
+                  <input
+                    type="password"
+                    id="confirm-new-password"
+                    placeholder="Confirm new password"
+                    required
+                  />
+                  <i
+                    class="bx bx-hide toggle-modal-password"
+                    onclick="toggleModalPassword('confirm-new-password', this)"
+                  ></i>
+                </div>
+              </div>
+
+              <div id="password-message" class="form-message"></div>
+
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="btn-cancel"
+                  onclick="showSettingsOptions()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn-save">Update Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div
+      class="modal-overlay forgot-password-overlay"
+      id="forgotPasswordOverlay"
+      onclick="closeForgotPasswordModal()"
+    ></div>
+    <div class="forgot-password-modal" id="forgotPasswordModal">
+      <div class="modal-header">
+        <h3>Reset Password</h3>
+        <button class="close-modal-btn" onclick="closeForgotPasswordModal()">
+          ×
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          Enter your email address and we'll send you a link to reset your
+          password.
+        </p>
+        <form
+          id="forgot-password-form"
+          onsubmit="handleForgotPassword(event)"
+          novalidate
+        >
+          <div class="profile-field">
+            <label for="forgot-email">Email</label>
+            <div class="input-group">
+              <i class="bx bx-envelope"></i>
+              <input
+                type="email"
+                id="forgot-email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn-save"
+            style="width: 100%; margin-top: 20px"
+          >
+            Send Reset Link
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Password Reset Confirmation Alert -->
+    <div
+      class="confirmation-overlay"
+      id="confirmationOverlay"
+      onclick="closeResetConfirmation()"
+    >
+      <div class="reset-confirmation-alert" id="resetConfirmationAlert">
+        <p class="reset-confirmation-text" id="resetConfirmationText">
+          Password reset link has been sent to your email
+        </p>
+        <button
+          class="reset-confirmation-btn"
+          onclick="event.stopPropagation(); closeResetConfirmation()"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 BarberLink. All rights reserved. | Connecting barbers with
+          opportunities
+        </p>
+      </div>
+    </footer>
+    <!-- Floating Quiz Button -->
+    <button
+      class="floating-quiz-btn"
+      onclick="openQuizModal()"
+      aria-label="Take Quiz"
+    >
+      <i class="bx bx-conversation"></i>
+    </button>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>

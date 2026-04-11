@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book — Fares Barbershop · BarberLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&family=Yeseva+One&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init("cDUi14ftfEXNfpYTx");</script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <header class="hdr">
+      <div class="hdr-left">
+        <a class="hdr-back" href="../BookingPage/index.html#search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </a>
+      </div>
+      <div class="hdr-center">
+        <a href="../HomePage/index.html" style="text-decoration:none">
+          <div class="hdr-logo">BarberLink</div>
+        </a>
+        <div class="hdr-divider"></div>
+        <div class="hdr-shop" id="hdrShopName">Fares Barbershop</div>
+        <div class="hdr-loc"  id="hdrShopLoc">Abdoun Circle, Amman</div>
+      </div>
+      <div class="hdr-right"></div>
+    </header>
+
+    <!-- STEP RAIL -->
+    <nav class="rail" id="rail">
+      <div class="rail-step active" data-s="1" onclick="go(1)">
+        <div class="rail-num-inner">01</div>
+        <span class="rail-step-label">Services</span>
+      </div>
+      <div class="rail-sep"></div>
+      <div class="rail-step" data-s="2" onclick="go(2)">
+        <div class="rail-num-inner">02</div>
+        <span class="rail-step-label">Staff</span>
+      </div>
+      <div class="rail-sep"></div>
+      <div class="rail-step" data-s="3" onclick="go(3)">
+        <div class="rail-num-inner">03</div>
+        <span class="rail-step-label">Date &amp; Time</span>
+      </div>
+      <div class="rail-sep"></div>
+      <div class="rail-step" data-s="4" onclick="go(4)">
+        <div class="rail-num-inner">04</div>
+        <span class="rail-step-label">Checkout</span>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <main class="main">
+
+        <!-- S1: SERVICES -->
+        <div class="section active" id="s1">
+          <div class="sec-head">
+            <div class="sec-head-left">
+              <div class="sec-eyebrow">Step 01</div>
+              <div class="sec-title">Choose your <em>services</em></div>
+              <div class="sec-sub">Select one or more — we combine them into a single visit.</div>
+            </div>
+            <div class="sec-counter">01</div>
+          </div>
+          <div class="sec-body">
+            <div class="svc-list" id="svcList"></div>
+            <div class="btn-row">
+              <div></div>
+              <button class="btn btn-primary" id="b1" onclick="go(2)" disabled>
+                Continue
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- S2: STAFF -->
+        <div class="section" id="s2">
+          <div class="sec-head">
+            <div class="sec-head-left">
+              <div class="sec-eyebrow">Step 02</div>
+              <div class="sec-title">Choose your <em>barber</em></div>
+              <div class="sec-sub">All our team are highly trained. Pick a preference or let us assign.</div>
+            </div>
+            <div class="sec-counter">02</div>
+          </div>
+          <div class="sec-body">
+            <div class="staff-grid" id="staffGrid"></div>
+            <div class="btn-row">
+              <button class="btn btn-ghost" onclick="go(1)">← Back</button>
+              <button class="btn btn-primary" id="b2" onclick="go(3)" disabled>
+                Continue
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- S3: DATE & TIME -->
+        <div class="section" id="s3">
+          <div class="sec-head">
+            <div class="sec-head-left">
+              <div class="sec-eyebrow">Step 03</div>
+              <div class="sec-title">Date <em>&amp;</em> time</div>
+              <div class="sec-sub">Pick a date then select from available slots.</div>
+            </div>
+            <div class="sec-counter">03</div>
+          </div>
+          <div class="sec-body">
+            <div class="cal-wrap">
+
+              <!-- Calendar -->
+              <div class="cal">
+                <div class="cal-top">
+                  <button class="cal-nav" onclick="shiftM(-1)">‹</button>
+                  <div class="cal-month-lbl" id="calLbl"></div>
+                  <button class="cal-nav" onclick="shiftM(1)">›</button>
+                </div>
+                <div class="cal-body">
+                  <div class="cal-dow">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span>
+                    <span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="cal-grid" id="calGrid"></div>
+                  <div id="cal-sameday-notice" class="sameday-notice" style="display:none">
+                    <div class="sameday-title">Same-day bookings are unavailable.</div>
+                    <div class="sameday-sub">Please select tomorrow or a future date.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Time Slots -->
+              <div class="times-col">
+                <div class="times-ph" id="tPh">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                  <span>Select a date</span>
+                </div>
+                <div class="times-box" id="tBox" style="display:none">
+                  <div class="times-header" id="tBoxHeader">Available Times</div>
+                  <div class="times-body" id="tBoxBody"></div>
+                </div>
+              </div>
+
+              <!-- Waiting List -->
+              <div class="wl-col" id="wlSection">
+                <div class="wl-col-inner">
+                  <div class="wl-rule"></div>
+                  <div class="wl-eyebrow">Waiting list</div>
+                  <div class="wl-title">Time <em>preference</em></div>
+                  <div class="wl-sub">Pick a window — we'll slot you in when one opens.</div>
+                  <div class="wl-grid">
+                    <div class="wl-cell" onclick="pickWL('any')">
+                      <div class="wl-cell-t">Any</div>
+                      <div class="wl-cell-s">First available</div>
+                    </div>
+                    <div class="wl-cell" onclick="pickWL('before')">
+                      <div class="wl-cell-t">Before</div>
+                      <div class="wl-cell-s">Earlier</div>
+                    </div>
+                    <div class="wl-cell" onclick="pickWL('after')">
+                      <div class="wl-cell-t">After</div>
+                      <div class="wl-cell-s">Later</div>
+                    </div>
+                    <div class="wl-cell" onclick="pickWL('between')">
+                      <div class="wl-cell-t">Between</div>
+                      <div class="wl-cell-s">Window</div>
+                    </div>
+                  </div>
+                  <div class="wl-time-row" id="wlTimeBefore" style="display:none">
+                    <div class="wl-time-lbl">Before</div>
+                    <input type="time" class="wl-time-in" id="wlTimeBeforeVal"
+                      oninput="if(st.date) document.getElementById('b3').disabled = !wlTimeValid()" />
+                  </div>
+                  <div class="wl-time-row" id="wlTimeAfter" style="display:none">
+                    <div class="wl-time-lbl">After</div>
+                    <input type="time" class="wl-time-in" id="wlTimeAfterVal"
+                      oninput="if(st.date) document.getElementById('b3').disabled = !wlTimeValid()" />
+                  </div>
+                  <div class="wl-time-row" id="wlTimeBetween" style="display:none">
+                    <div class="wl-time-lbl">From</div>
+                    <input type="time" class="wl-time-in" id="wlTimeFrom"
+                      oninput="if(st.date) document.getElementById('b3').disabled = !wlTimeValid()" />
+                    <span class="wl-time-sep">—</span>
+                    <div class="wl-time-lbl">To</div>
+                    <input type="time" class="wl-time-in" id="wlTimeTo"
+                      oninput="if(st.date) document.getElementById('b3').disabled = !wlTimeValid()" />
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /.cal-wrap -->
+
+            <div class="btn-row">
+              <button class="btn btn-ghost" onclick="go(2)">← Back</button>
+              <button class="btn btn-primary" id="b3" onclick="go(4)" disabled>
+                Continue
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- S4: CHECKOUT -->
+        <div class="section" id="s4">
+          <div class="sec-head">
+            <div class="sec-head-left">
+              <div class="sec-eyebrow">Step 04</div>
+              <div class="sec-title">Your <em>details</em></div>
+              <div class="sec-sub">Almost done. Fill in your contact info to confirm the booking.</div>
+            </div>
+            <div class="sec-counter">04</div>
+          </div>
+          <div class="sec-body">
+            <div class="form-grid">
+              <div class="fg">
+                <label class="flabel">First Name</label>
+                <input type="text" class="finput" id="fFN" placeholder="Ahmad"
+                  oninput="syncName(); clearErr('fFN','fFN-e')" />
+                <div class="field-err" id="fFN-e">This field is required</div>
+              </div>
+              <div class="fg">
+                <label class="flabel">Last Name</label>
+                <input type="text" class="finput" id="fLN" placeholder="Al-Hassan"
+                  oninput="syncName(); clearErr('fLN','fLN-e')" />
+                <div class="field-err" id="fLN-e">This field is required</div>
+              </div>
+              <div class="fg">
+                <label class="flabel">Phone</label>
+                <input type="tel" class="finput" id="fPh" placeholder="+962 7X XXX XXXX"
+                  oninput="formatPhone(this)" />
+                <div class="field-err" id="fPh-e">This field is required</div>
+              </div>
+              <div class="fg">
+                <label class="flabel">Email</label>
+                <input type="email" class="finput" id="fEm" placeholder="ahmad@example.com"
+                  oninput="validateEmail(this)" />
+                <div class="field-err" id="fEm-e">This field is required</div>
+              </div>
+              <div class="fg full">
+                <label class="flabel">
+                  Appointment Note &nbsp;<span class="flabel-opt">(optional)</span>
+                </label>
+                <textarea class="ftarea" id="fNt" placeholder="e.g. Skin fade on sides, natural on top."></textarea>
+              </div>
+              <div class="fg full">
+                <label class="flabel">
+                  Promo Code &nbsp;<span class="flabel-opt">(optional)</span>
+                </label>
+                <div class="promo-row">
+                  <input type="text" class="finput promo-input" id="fPromo" placeholder="Enter code"
+                    oninput="this.value = this.value.toUpperCase(); resetPromo()" />
+                  <button class="promo-apply-btn" onclick="applyPromo()">Apply</button>
+                </div>
+                <div class="promo-pills" id="promoPills"></div>
+                <div class="promo-msg"    id="promoMsg"></div>
+              </div>
+            </div>
+
+            <!-- Cancellation Policy -->
+            <div class="cancel-block">
+              <div class="cancel-ttl">Cancellation Policy</div>
+              <div class="cancel-tl">
+                <div class="cpill" id="cPill">Select a date</div>
+                <div class="cbar">
+                  <div class="cbar-fill"></div>
+                  <div class="cdot"></div>
+                </div>
+                <div class="cends">
+                  <span>Today</span><span>Appointment</span>
+                </div>
+              </div>
+              <div class="cnote" id="cNote">
+                Select a date and time above to see your cancellation deadline.
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <button class="btn btn-ghost" onclick="go(3)">← Back</button>
+              <button class="btn-confirm-luxury" onclick="doConfirm()">
+                <div class="btn-confirm-fill"></div>
+                <span class="btn-confirm-txt">Confirm your booking</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIRMATION -->
+        <div class="confirm-scr" id="confirmScr">
+          <div class="c-bg-txt">Booked.</div>
+          <div class="c-top">
+            <div class="c-logo">BarberLink</div>
+            <div class="c-confirmed">Confirmed</div>
+          </div>
+          <div class="c-title-block">
+            <div class="c-title">You're booked.</div>
+            <div class="c-rule"></div>
+            <div class="c-sub" id="cSub">Your appointment is confirmed. We'll see you soon.</div>
+          </div>
+          <div class="c-grid" id="cGrid">
+            <div class="c-gc">
+              <div class="c-gl">Service</div>
+              <div class="c-gv" id="cGridSvc">—</div>
+            </div>
+            <div class="c-gc">
+              <div class="c-gl">Payment</div>
+              <div class="c-gv" id="cGridPay">—</div>
+            </div>
+            <div class="c-gc">
+              <div class="c-gl">Total</div>
+              <div class="c-gv" id="cGridTotal">—</div>
+            </div>
+          </div>
+          <div class="c-foot">
+            <a class="c-back" href="../BookingPage/index.html#search">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Book another appointment
+            </a>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ASIDE — Appointment Summary -->
+      <aside class="aside">
+        <div class="aside-inner">
+          <div class="aside-head">
+            <div class="aside-ey">Appointment Summary</div>
+            <div class="aside-sn" id="asideShopName">Fares<br />Barbershop</div>
+          </div>
+          <div class="aside-body">
+            <div class="sum-row">
+              <div class="sum-key">Services</div>
+              <div class="sum-val" id="sSvc"><span class="empty">Not selected</span></div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Barber</div>
+              <div class="sum-val" id="sStaff"><span class="empty">Not selected</span></div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Date</div>
+              <div class="sum-val" id="sDate"><span class="empty">Not selected</span></div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Time</div>
+              <div class="sum-val" id="sTime"><span class="empty">Not selected</span></div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Duration</div>
+              <div class="sum-val" id="sDur"><span class="empty">—</span></div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Payment</div>
+              <div class="sum-val" id="sPay">
+                Cash on Arrival
+                <span class="pay-note">All payments are cash only</span>
+              </div>
+            </div>
+            <div class="sum-row">
+              <div class="sum-key">Client</div>
+              <div class="sum-val" id="sClient"><span class="empty">Not entered</span></div>
+            </div>
+          </div>
+          <div class="aside-tot">
+            <div class="tot-lbl">Total</div>
+            <div class="tot-right">
+              <div class="tot-original" id="sTotalOriginal" style="display:none"></div>
+              <div class="tot-val" id="sTotal">0 JD</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- CANCELLATION POLICY MODAL -->
+    <div class="modal-overlay" id="policyModal" onclick="closePolicyModal(event)">
+      <div class="modal-box">
+        <button class="modal-close"
+          onclick="document.getElementById('policyModal').classList.remove('show')">✕</button>
+        <div class="modal-title">Cancellation Policy</div>
+        <div class="modal-body">
+          We ask that you please reschedule or cancel at least 3 days before the
+          beginning of your appointment.
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

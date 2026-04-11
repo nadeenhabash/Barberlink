@@ -1,11 +1,14 @@
 const jobsData = {
   barber: {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "Fares Barber Shop",
     position: "Professional Barber",
     location: "Amman, Jordan",
     description:
-      "We're looking for a skilled and passionate Professional Barber to join our team and deliver top-quality grooming services to our clients. As a key member of our barbershop, you'll be responsible for creating stylish, modern, and classic haircuts, providing expert shaves, and ensuring every client leaves looking and feeling their best.",
+      "We're looking for a skilled and passionate Professional Barber to join our team and deliver " +
+      "top-quality grooming services to our clients. As a key member of our barbershop, you'll be " +
+      "responsible for creating stylish, modern, and classic haircuts, providing expert shaves, and " +
+      "ensuring every client leaves looking and feeling their best.",
     responsibilities: [
       "Perform precision haircuts, fades, tapers, and beard grooming services.",
       "Offer hot towel shaves, hair styling, and finishing techniques.",
@@ -30,12 +33,14 @@ const jobsData = {
   },
 
   "salon-manager": {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "Capri Salon Barbershop",
     position: "Social Media Manager",
     location: "Amman, Jordan",
     description:
-      "We are seeking a Salon Manager to lead our barbershop team, ensure smooth day-to-day operations, and create an exceptional client experience. The Salon Manager will oversee staff, scheduling, inventory, and customer service while supporting the growth and success of the shop.",
+      "We are seeking a Salon Manager to lead our barbershop team, ensure smooth day-to-day " +
+      "operations, and create an exceptional client experience. The Salon Manager will oversee staff, " +
+      "scheduling, inventory, and customer service while supporting the growth and success of the shop.",
     responsibilities: [
       "Manage daily operations to ensure the barbershop runs efficiently and professionally.",
       "Supervise barbers, receptionists, and support staff, fostering a positive and motivated work environment.",
@@ -62,12 +67,15 @@ const jobsData = {
   },
 
   "social-media-manager-shanab": {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "Shanab Barber Shop",
     position: "Social Media Manager",
     location: "Zarqa, Jordan",
     description:
-      "We are looking for a creative and results-driven Social Media Manager to build our barbershop's online presence and engage with our community across all digital platforms. The ideal candidate will be passionate about content creation, marketing trends, and growing brand visibility while showcasing our services and culture.",
+      "We are looking for a creative and results-driven Social Media Manager to build our barbershop's " +
+      "online presence and engage with our community across all digital platforms. The ideal candidate " +
+      "will be passionate about content creation, marketing trends, and growing brand visibility while " +
+      "showcasing our services and culture.",
     responsibilities: [
       "Develop and implement a social media strategy to increase brand awareness and customer engagement.",
       "Create high-quality, engaging content including photos, videos, reels, and stories highlighting our barbershop services, staff, and customer experiences.",
@@ -94,12 +102,14 @@ const jobsData = {
   },
 
   "beard-specialist": {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "Shabab Barber Shop",
     position: "Beard & Grooming Specialist",
     location: "Zarqa, Jordan",
     description:
-      "We are seeking a skilled Beard & Grooming Specialist to join our team and deliver top-quality beard care and grooming services to our clients. This role focuses on precision, style, and customer satisfaction, ensuring each client leaves with a sharp, confident look.",
+      "We are seeking a skilled Beard & Grooming Specialist to join our team and deliver top-quality " +
+      "beard care and grooming services to our clients. This role focuses on precision, style, and " +
+      "customer satisfaction, ensuring each client leaves with a sharp, confident look.",
     responsibilities: [
       "Provide expert beard trims, shaping, and styling tailored to client preferences.",
       "Perform luxury grooming services such as hot towel treatments and straight razor shaves.",
@@ -126,12 +136,15 @@ const jobsData = {
   },
 
   "customer-experience": {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "Mr Black barbershop",
     position: "Customer Experience Associate",
     location: "Zarqa, Jordan",
     description:
-      "We're looking for a friendly, energetic Customer Experience Associate to be the face of our barbershop. This role is all about creating a welcoming atmosphere, ensuring clients have a smooth, enjoyable experience from the moment they book an appointment to the time they leave looking their best.",
+      "We're looking for a friendly, energetic Customer Experience Associate to be the face of our " +
+      "barbershop. This role is all about creating a welcoming atmosphere, ensuring clients have a " +
+      "smooth, enjoyable experience from the moment they book an appointment to the time they leave " +
+      "looking their best.",
     responsibilities: [
       "Greet clients warmly as they enter the barbershop and assist with check-ins.",
       "Manage appointments, scheduling, walk-ins, and client inquiries efficiently.",
@@ -159,12 +172,15 @@ const jobsData = {
   },
 
   "marketing-specialist": {
-    title: "BARBER LINK",
+    title:    "BARBER LINK",
     shopName: "O&M Barber Shop",
     position: "Marketing & Promotions Specialist",
     location: "Amman, Jordan",
     description:
-      "We are looking for a creative and results-driven Marketing & Promotions Specialist to help grow our barbershop's brand, attract new clients, and keep our community engaged. This role focuses on creating effective marketing campaigns, organizing promotions, and ensuring our services reach the right audience.",
+      "We are looking for a creative and results-driven Marketing & Promotions Specialist to help " +
+      "grow our barbershop's brand, attract new clients, and keep our community engaged. This role " +
+      "focuses on creating effective marketing campaigns, organizing promotions, and ensuring our " +
+      "services reach the right audience.",
     responsibilities: [
       "Plan and execute marketing campaigns to promote services, special offers, and events.",
       "Design promotional materials for in-store and online use, including flyers, social media posts, and email newsletters.",

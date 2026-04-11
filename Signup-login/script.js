@@ -557,11 +557,15 @@ function getRedirectUrl() {
     'home': '../HomePage/index.html',
     'jobs': '../jobsPage/index.html',
     'shop': '../ShopPage/index.html',
-    'partner': '../partnerPage/index.html'
+    'partner': '../partnerPage/index.html',
+    'bookingsystem': '../BookingSystem/index.html'
   };
-  
+
   if (returnUrl && redirectMap[returnUrl]) {
-    return redirectMap[returnUrl];
+    // Preserve shop param if present
+    const shopId = urlParams.get('shop');
+    const base = redirectMap[returnUrl];
+    return shopId ? `${base}?shop=${shopId}` : base;
   }
   
   // If no returnUrl parameter, detect from referrer (previous page)
@@ -935,3 +939,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Coming Soon Modal
+document.addEventListener("DOMContentLoaded", function () {
+  var overlay = document.getElementById("csOverlay");
+  var closeBtn = document.getElementById("csClose");
+  var storeLink = document.getElementById("storeNavLink");
+  if (!overlay) return;
+  function openModal(e) { e.preventDefault(); overlay.classList.add("active"); }
+  function closeModal() { overlay.classList.remove("active"); }
+  if (storeLink) storeLink.addEventListener("click", openModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", function(e) { if (e.target === overlay) closeModal(); });
+});

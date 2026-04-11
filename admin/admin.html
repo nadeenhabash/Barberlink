@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BarberLink — Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- TOAST BAR -->
+    <div id="toast-bar">
+      <div class="toast-dot" id="toast-dot"></div>
+      <span id="toast-msg"></span>
+      <span class="toast-dismiss" onclick="dismissToast()">Dismiss</span>
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="brand">BarberLink</div>
+        <div class="brand-sub">Admin Console</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <div class="nav-item" onclick="showPage('dashboard', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </div>
+        <div class="nav-item active" onclick="showPage('appointments', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          Appointments
+        </div>
+        <div class="nav-item" onclick="showPage('customers', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="7" r="4" />
+            <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87" />
+          </svg>
+          Customers
+        </div>
+        <div class="nav-item" onclick="showPage('shops', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          Shops
+        </div>
+        <div class="nav-item" onclick="showPage('partners', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <line x1="19" y1="8" x2="23" y2="8" />
+            <line x1="21" y1="6" x2="21" y2="10" />
+          </svg>
+          Partner Applications
+        </div>
+        <div class="nav-item" onclick="showPage('jobapps', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Job Applications
+        </div>
+        <div class="nav-section-label">Analytics</div>
+        <div class="nav-item" onclick="showPage('ratings', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          Ratings
+        </div>
+        <div class="nav-item" onclick="showPage('promos', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+          Promo Codes
+        </div>
+        <div class="nav-item" onclick="showPage('email', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          Daily Email
+        </div>
+        <div class="nav-item" onclick="showPage('settings', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Settings
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="admin-avatar">A</div>
+        <div>
+          <div class="admin-name">Admin</div>
+          <div class="admin-role">Super Admin</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="page-title" id="page-title">Appointments</div>
+        <div class="shop-switcher" id="shop-switcher">
+          <div class="shop-tab active" onclick="switchShop(this, 'fares')">
+            <div class="st-num">01</div>
+            <div class="st-name">Fares Barbershop</div>
+          </div>
+          <div class="shop-tab" onclick="switchShop(this, 'capri')">
+            <div class="st-num">02</div>
+            <div class="st-name">Capri Barbershop</div>
+          </div>
+          <div class="shop-tab" onclick="switchShop(this, 'om')">
+            <div class="st-num">03</div>
+            <div class="st-name">O&amp;M Barbershop</div>
+          </div>
+        </div>
+        <div class="topbar-gap"></div>
+        <!-- Notification Center -->
+        <div class="notif-wrap" id="notif-wrap">
+          <button class="notif-btn" onclick="toggleNotifDropdown()" title="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="notif-badge-dot" id="notif-badge-dot"></span>
+          </button>
+          <div class="notif-dropdown" id="notif-dropdown">
+            <div class="notif-drop-header">
+              <span class="notif-drop-title">Notifications</span>
+              <button class="notif-clear-btn" onclick="clearAllNotifs()">Mark all read</button>
+            </div>
+            <div class="notif-list" id="notif-list">
+              <div class="notif-empty">No notifications yet.</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-new" onclick="openNewAppt()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          New Appointment
+        </button>
+      </div>
+
+      <!-- APPOINTMENTS -->
+      <div class="page active" id="page-appointments">
+        <div class="stats-strip">
+          <div class="stat-item">
+            <div class="stat-dot sd1"></div>
+            <div>
+              <div class="stat-val" id="s-bookings">0</div>
+              <div class="stat-lbl" id="s-lbl-bookings">Bookings — Today</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-dot sd2"></div>
+            <div>
+              <div class="stat-val" id="s-revenue">0 JD</div>
+              <div class="stat-lbl" id="s-lbl-revenue">Revenue — Today</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-dot sd3"></div>
+            <div>
+              <div class="stat-val" id="s-barbers">4</div>
+              <div class="stat-lbl">Active Barbers</div>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-dot sd4"></div>
+            <div>
+              <div class="stat-val" id="s-first">0</div>
+              <div class="stat-lbl" id="s-lbl-first">First-Time — Today</div>
+            </div>
+          </div>
+        </div>
+        <div class="cal-area">
+          <div class="cal-month-bar">
+            <div class="cal-month-label" id="month-label"></div>
+            <div class="cal-range-label" id="week-range-label"></div>
+          </div>
+          <div class="week-strip">
+            <button class="week-nav-btn" onclick="shiftWeek(-1)">&#8592;</button>
+            <div class="week-days" id="week-days"></div>
+            <button class="week-nav-btn" onclick="shiftWeek(1)">&#8594;</button>
+          </div>
+          <div class="barber-header-row" id="barber-header-row">
+            <div class="bh-time-empty"></div>
+          </div>
+          <div class="cal-grid-wrap">
+            <div class="cal-grid" id="cal-rows"></div>
+          </div>
+          <!-- WAITING LIST PANEL -->
+          <div class="wl-panel" id="wl-panel">
+            <div class="wl-panel-header">
+              <div class="wl-panel-title">Waiting List</div>
+              <div class="wl-count" id="wl-count">0</div>
+            </div>
+            <div id="wl-body">
+              <div class="wl-empty">No waiting list entries for this day.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="page" id="page-dashboard">
+        <div class="dash-scroll">
+          <div class="section-title">All Shops — Today's Summary</div>
+          <div class="dash-shops-grid">
+            <div class="dash-shop-card">
+              <div class="dsc-name">Fares Barbershop</div>
+              <div class="dsc-row"><span>Bookings</span><strong id="dash-fares-bookings">0</strong></div>
+              <div class="dsc-row"><span>Revenue</span><strong id="dash-fares-revenue">0 JD</strong></div>
+              <div class="dsc-row"><span>Barbers Active</span><strong>5 / 5</strong></div>
+              <div class="dsc-row"><span>New Clients</span><strong id="dash-fares-first">0</strong></div>
+              <div class="dsc-row"><span>Avg Rating</span><strong id="dash-fares-rating">—</strong></div>
+              <div class="dsc-bar"><div class="dsc-bar-fill" id="dash-fares-bar" style="width:0%"></div></div>
+              <div class="dsc-bar-lbl" id="dash-fares-util">0% capacity utilisation</div>
+            </div>
+            <div class="dash-shop-card">
+              <div class="dsc-name">Capri Barbershop</div>
+              <div class="dsc-row"><span>Bookings</span><strong id="dash-capri-bookings">0</strong></div>
+              <div class="dsc-row"><span>Revenue</span><strong id="dash-capri-revenue">0 JD</strong></div>
+              <div class="dsc-row"><span>Barbers Active</span><strong>3 / 3</strong></div>
+              <div class="dsc-row"><span>New Clients</span><strong id="dash-capri-first">0</strong></div>
+              <div class="dsc-row"><span>Avg Rating</span><strong id="dash-capri-rating">—</strong></div>
+              <div class="dsc-bar"><div class="dsc-bar-fill" id="dash-capri-bar" style="width:0%"></div></div>
+              <div class="dsc-bar-lbl" id="dash-capri-util">0% capacity utilisation</div>
+            </div>
+            <div class="dash-shop-card">
+              <div class="dsc-name">O&amp;M Barbershop</div>
+              <div class="dsc-row"><span>Bookings</span><strong id="dash-om-bookings">0</strong></div>
+              <div class="dsc-row"><span>Revenue</span><strong id="dash-om-revenue">0 JD</strong></div>
+              <div class="dsc-row"><span>Barbers Active</span><strong>4 / 4</strong></div>
+              <div class="dsc-row"><span>New Clients</span><strong id="dash-om-first">0</strong></div>
+              <div class="dsc-row"><span>Avg Rating</span><strong id="dash-om-rating">—</strong></div>
+              <div class="dsc-bar"><div class="dsc-bar-fill" id="dash-om-bar" style="width:0%"></div></div>
+              <div class="dsc-bar-lbl" id="dash-om-util">0% capacity utilisation</div>
+            </div>
+          </div>
+          <div class="section-title">Recent Appointments — All Shops</div>
+          <div class="dash-recent-card">
+            <div class="dash-recent-head">Today's Activity</div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Client</th><th>Shop</th><th>Barber</th>
+                  <th>Service</th><th>Time</th><th>Price</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dash-recent-tbody">
+                <tr>
+                  <td colspan="7" style="text-align:center;color:var(--text-muted);font-style:italic;padding:20px">
+                    No bookings yet.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMERS -->
+      <div class="page" id="page-customers">
+        <div class="customers-wrap">
+          <div class="cust-toolbar">
+            <input class="cust-search" placeholder="Search by name or shop..." oninput="filterCustomers(this.value)" />
+          </div>
+          <div class="cust-table-wrap">
+            <table class="data-table" id="cust-table">
+              <thead>
+                <tr>
+                  <th>Client</th><th>Shop</th><th>Visits</th>
+                  <th>Last Service</th><th>Last Visit</th><th>Total Spent</th><th>Avg Rating</th>
+                </tr>
+              </thead>
+              <tbody id="cust-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RATINGS -->
+      <div class="page" id="page-ratings">
+        <div class="ratings-wrap">
+          <div class="ratings-summary" id="ratings-summary"></div>
+          <div class="ratings-toolbar">
+            <select class="ratings-filter" id="ratings-shop-filter" onchange="renderRatings()">
+              <option value="all">All Shops</option>
+              <option value="Fares Barbershop">Fares Barbershop</option>
+              <option value="Capri Barbershop">Capri Barbershop</option>
+              <option value="O&amp;M Barbershop">O&amp;M Barbershop</option>
+            </select>
+            <select class="ratings-filter" id="ratings-star-filter" onchange="renderRatings()">
+              <option value="all">All Stars</option>
+              <option value="5">★★★★★ 5 stars</option>
+              <option value="4">★★★★☆ 4 stars</option>
+              <option value="3">★★★☆☆ 3 stars</option>
+              <option value="2">★★☆☆☆ 2 stars</option>
+              <option value="1">★☆☆☆☆ 1 star</option>
+            </select>
+          </div>
+          <div class="cust-table-wrap">
+            <table class="data-table" id="ratings-table">
+              <thead>
+                <tr>
+                  <th>Client</th><th>Shop</th><th>Barber</th>
+                  <th>Service</th><th>Date</th><th>Rating</th><th>Rated On</th>
+                </tr>
+              </thead>
+              <tbody id="ratings-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMO CODES -->
+      <div class="page" id="page-promos">
+        <div class="promos-wrap">
+          <div class="promo-form-card">
+            <div class="promo-form-title">Create New Promo Code</div>
+            <div class="promo-form-grid">
+              <div class="promo-fg">
+                <label class="promo-flabel">Code</label>
+                <input class="promo-finput" id="pf-code" placeholder="e.g. SUMMER20" oninput="this.value=this.value.toUpperCase().replace(/\s/g,'')" />
+                <div class="promo-ferr" id="pf-code-err"></div>
+              </div>
+              <div class="promo-fg">
+                <label class="promo-flabel">Discount Type</label>
+                <select class="promo-finput" id="pf-type">
+                  <option value="percent">Percentage (%)</option>
+                  <option value="fixed">Fixed Amount (JD)</option>
+                </select>
+              </div>
+              <div class="promo-fg">
+                <label class="promo-flabel">Value</label>
+                <input class="promo-finput" id="pf-value" type="number" min="1" max="100" placeholder="e.g. 20" />
+                <div class="promo-ferr" id="pf-value-err"></div>
+              </div>
+              <div class="promo-fg">
+                <label class="promo-flabel">
+                  Max Uses
+                  <span style="font-weight:400;font-size:12px;color:var(--text-muted)">(0 = unlimited)</span>
+                </label>
+                <input class="promo-finput" id="pf-uses" type="number" min="0" placeholder="0" value="0" />
+              </div>
+            </div>
+            <div class="promo-conditions-label">
+              Conditions
+              <span style="font-weight:400;font-size:12px;color:var(--text-muted);text-transform:none;letter-spacing:0">(optional)</span>
+            </div>
+            <div class="promo-form-grid">
+              <div class="promo-fg">
+                <label class="promo-flabel">
+                  Min Order Amount (JD)
+                  <span style="font-weight:400;font-size:11px;color:var(--text-muted)">(0 = no min)</span>
+                </label>
+                <input class="promo-finput" id="pf-minorder" type="number" min="0" placeholder="0" value="0" />
+              </div>
+              <div class="promo-fg">
+                <label class="promo-flabel">Shop Restriction</label>
+                <select class="promo-finput" id="pf-shop">
+                  <option value="all">All Shops</option>
+                  <option value="Fares Barbershop">Fares Barbershop</option>
+                  <option value="Capri Barbershop">Capri Barbershop</option>
+                  <option value="O&amp;M Barbershop">O&amp;M Barbershop</option>
+                </select>
+              </div>
+              <div class="promo-fg">
+                <label class="promo-flabel">
+                  Expiry Date
+                  <span style="font-weight:400;font-size:11px;color:var(--text-muted)">(leave blank = no expiry)</span>
+                </label>
+                <input class="promo-finput" id="pf-expiry" type="date" />
+              </div>
+            </div>
+            <div class="promo-form-footer">
+              <button class="promo-create-btn" onclick="createPromo()">Create Code</button>
+            </div>
+          </div>
+          <div class="promo-table-card">
+            <div class="promo-table-head">
+              <div class="promo-table-title">Active Codes</div>
+              <div class="promo-count" id="promo-count">0 codes</div>
+            </div>
+            <div class="cust-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Code</th><th>Type</th><th>Value</th><th>Uses</th>
+                    <th>Max Uses</th><th>Min Order</th><th>Shop</th>
+                    <th>Expiry</th><th>Created</th><th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="promos-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOPS -->
+      <div class="page" id="page-shops">
+        <div class="shops-wrap">
+          <div class="shops-grid" id="shops-grid"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page" id="page-settings">
+        <div class="settings-wrap">
+          <div class="settings-grid">
+            <div class="settings-card">
+              <div class="settings-card-title">Booking Rules</div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Booking Window</div>
+                  <div class="setting-desc">How far ahead clients can book</div>
+                </div>
+                <input class="setting-input" value="30 days" />
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Slot Duration</div>
+                  <div class="setting-desc">Minimum time per appointment</div>
+                </div>
+                <input class="setting-input" value="30 min" />
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Buffer Between Slots</div>
+                  <div class="setting-desc">Gap after each appointment</div>
+                </div>
+                <input class="setting-input" value="0 min" />
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Max Bookings Per Day</div>
+                  <div class="setting-desc">Per barber limit</div>
+                </div>
+                <input class="setting-input" value="12" />
+              </div>
+              <button class="btn-save">Save Changes</button>
+            </div>
+            <div class="settings-card">
+              <div class="settings-card-title">Notifications</div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">New Booking Alert</div>
+                  <div class="setting-desc">Notify admin on new bookings</div>
+                </div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Cancellation Alert</div>
+                  <div class="setting-desc">Notify on cancellations</div>
+                </div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Daily Summary Email</div>
+                  <div class="setting-desc">End-of-day report to admin</div>
+                </div>
+                <div class="toggle" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">First-Time Client Alert</div>
+                  <div class="setting-desc">Flag new clients on booking</div>
+                </div>
+                <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <button class="btn-save">Save Changes</button>
+            </div>
+            <div class="settings-card">
+              <div class="settings-card-title">Admin Account</div>
+              <div class="setting-row">
+                <div><div class="setting-lbl">Display Name</div></div>
+                <input class="setting-input" value="Admin" />
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-lbl">Email Address</div></div>
+                <input class="setting-input" value="admin@barberlink.jo" />
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-lbl">Language</div></div>
+                <input class="setting-input" value="English" />
+              </div>
+              <button class="btn-save">Save Changes</button>
+            </div>
+            <div class="settings-card">
+              <div class="settings-card-title">Platform</div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-lbl">Currency</div>
+                  <div class="setting-desc">Used across all shops</div>
+                </div>
+                <input class="setting-input" value="JD (Jordan)" />
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-lbl">Time Zone</div></div>
+                <input class="setting-input" value="Asia/Amman" />
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-lbl">Week Starts On</div></div>
+                <input class="setting-input" value="Sunday" />
+              </div>
+              <button class="btn-save">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARTNER APPLICATIONS -->
+      <div class="page" id="page-partners">
+        <div class="partners-wrap">
+          <div class="partners-stats-row">
+            <div class="partner-stat-card"><div class="psc-dot" style="background:#d4a84a"></div><div><div class="psc-val" id="ps-total">0</div><div class="psc-lbl">Total Applications</div></div></div>
+            <div class="partner-stat-card"><div class="psc-dot" style="background:#d4a84a"></div><div><div class="psc-val" id="ps-pending">0</div><div class="psc-lbl">Pending Review</div></div></div>
+            <div class="partner-stat-card"><div class="psc-dot" style="background:#7ab87a"></div><div><div class="psc-val" id="ps-approved">0</div><div class="psc-lbl">Approved</div></div></div>
+            <div class="partner-stat-card"><div class="psc-dot" style="background:#c87a7a"></div><div><div class="psc-val" id="ps-rejected">0</div><div class="psc-lbl">Rejected</div></div></div>
+          </div>
+          <div class="partners-toolbar">
+            <input class="partners-search" id="partners-search" placeholder="Search by brand, name, or email..." oninput="filterPartners()" />
+            <button class="partners-filter-btn active" onclick="setPartnerFilter(this, 'all')">All</button>
+            <button class="partners-filter-btn" onclick="setPartnerFilter(this, 'pending')">Pending</button>
+            <button class="partners-filter-btn" onclick="setPartnerFilter(this, 'approved')">Approved</button>
+            <button class="partners-filter-btn" onclick="setPartnerFilter(this, 'rejected')">Rejected</button>
+            <span class="partners-count-label" id="partners-count-label"></span>
+          </div>
+          <div class="partners-table-wrap">
+            <table class="data-table" id="partners-table">
+              <thead>
+                <tr>
+                  <th>Brand Name</th><th>Contact</th><th>Business Type</th>
+                  <th>Email</th><th>Mobile</th><th>License</th>
+                  <th>Submitted</th><th>Status</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="partners-tbody">
+                <tr>
+                  <td colspan="9" style="text-align:center;color:var(--text-muted);font-style:italic;padding:30px">
+                    No partner applications yet.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOB APPLICATIONS -->
+      <div class="page" id="page-jobapps">
+        <div class="jobapps-wrap">
+          <div class="jobapps-stats-row">
+            <div class="jas-card"><div class="jas-dot" style="background:#d4a84a"></div><div><div class="jas-val" id="jas-total">0</div><div class="jas-lbl">Total</div></div></div>
+            <div class="jas-card"><div class="jas-dot" style="background:#d4a84a"></div><div><div class="jas-val" id="jas-new">0</div><div class="jas-lbl">New</div></div></div>
+            <div class="jas-card"><div class="jas-dot" style="background:#6a90b8"></div><div><div class="jas-val" id="jas-reviewed">0</div><div class="jas-lbl">Reviewed</div></div></div>
+            <div class="jas-card"><div class="jas-dot" style="background:#7ab87a"></div><div><div class="jas-val" id="jas-shortlist">0</div><div class="jas-lbl">Shortlisted</div></div></div>
+            <div class="jas-card"><div class="jas-dot" style="background:#a870b0"></div><div><div class="jas-val" id="jas-interview">0</div><div class="jas-lbl">Interview</div></div></div>
+            <div class="jas-card"><div class="jas-dot" style="background:#c87a7a"></div><div><div class="jas-val" id="jas-rejected">0</div><div class="jas-lbl">Rejected</div></div></div>
+          </div>
+          <div class="jobapps-toolbar">
+            <input class="jobapps-search" id="jobapps-search" placeholder="Search by name, job, or shop..." oninput="renderJobAppsGrid()" />
+            <button class="jobapps-filter-btn active" onclick="setJobAppFilter(this,'all')">All</button>
+            <button class="jobapps-filter-btn" onclick="setJobAppFilter(this,'new')">New</button>
+            <button class="jobapps-filter-btn" onclick="setJobAppFilter(this,'reviewed')">Reviewed</button>
+            <button class="jobapps-filter-btn" onclick="setJobAppFilter(this,'shortlist')">Shortlisted</button>
+            <button class="jobapps-filter-btn" onclick="setJobAppFilter(this,'interview')">Interview</button>
+            <button class="jobapps-filter-btn" onclick="setJobAppFilter(this,'rejected')">Rejected</button>
+            <span class="jobapps-count" id="jobapps-count"></span>
+          </div>
+          <div class="jobapps-grid" id="jobapps-grid">
+            <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-style:italic;font-family:'EB Garamond',serif;padding:40px">
+              No job applications yet.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAILY EMAIL -->
+      <div class="page" id="page-email">
+        <div class="settings-wrap">
+          <div class="email-form-section">
+            <div class="section-title" style="margin-bottom:20px">Daily Email</div>
+            <div class="settings-card">
+              <div class="settings-card-title">Send Options</div>
+              <p class="email-desc">
+                Each barbershop receives a daily email with their full appointment list,
+                grouped by barber. Select a shop, enter the recipient, and send or preview.
+              </p>
+              <div class="email-fields-wrap">
+                <div>
+                  <div class="email-field-label">Select Shop</div>
+                  <select class="na-select" id="email-shop-select" style="width:260px">
+                    <option value="fares">Fares Barbershop</option>
+                    <option value="capri">Capri Barbershop</option>
+                    <option value="om">O&amp;M Barbershop</option>
+                  </select>
+                </div>
+                <div>
+                  <div class="email-field-label">Recipient Email</div>
+                  <input class="na-input" type="email" id="email-recipient" placeholder="shop@email.com" style="width:260px" />
+                </div>
+              </div>
+              <div class="email-actions">
+                <button class="btn-save" onclick="previewEmail()">Preview Email</button>
+                <button class="btn-save" onclick="sendDailyEmail()" id="send-email-btn">Send Now</button>
+                <button class="btn-save" style="background:var(--bg);color:var(--text-primary);border:1px solid var(--border)" onclick="copyEmailHTML()">Copy HTML</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- EMAIL PREVIEW OVERLAY -->
+    <div class="na-overlay" id="email-overlay" style="z-index:500;align-items:flex-start;padding:30px 0;overflow-y:auto">
+      <div class="email-overlay-inner">
+        <div class="email-preview-toolbar">
+          <div>
+            <div class="email-preview-title">Email Preview</div>
+            <div class="email-preview-sub">This is exactly what the barbershop will receive</div>
+          </div>
+          <div class="email-preview-actions">
+            <button class="btn-save" style="margin:0;padding:7px 14px;font-size:13px" onclick="sendDailyEmail()">Send Email</button>
+            <button class="btn-save" style="margin:0;padding:7px 14px;font-size:13px;background:var(--bg);color:var(--text-primary);border:1px solid var(--border)" onclick="copyEmailHTML()">Copy HTML</button>
+            <button class="modal-close" onclick="document.getElementById('email-overlay').classList.remove('visible')">&#x2715;</button>
+          </div>
+        </div>
+        <div class="email-preview-body" id="email-preview-body"></div>
+      </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- BLOCK SLOT MODAL -->
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h3 id="modal-title">Block this slot?</h3>
+        <p id="modal-desc">This time slot will be marked as unavailable.</p>
+        <div class="modal-btns">
+          <button class="mbtn cancel" onclick="closeModal()">Cancel</button>
+          <button class="mbtn confirm" onclick="confirmBlock()">Block Slot</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW APPOINTMENT MODAL -->
+    <div class="na-overlay" id="na-overlay">
+      <div class="na-modal">
+        <div class="na-header">
+          <div>
+            <div class="na-title">New Appointment</div>
+            <div class="na-shop-name" id="na-shop-name">Fares Barbershop</div>
+          </div>
+          <button class="modal-close" onclick="closeNewAppt()">&#x2715;</button>
+        </div>
+        <div class="na-grid">
+          <div class="na-field full">
+            <div class="na-label">Client Name</div>
+            <input class="na-input" id="na-client" placeholder="Full name" type="text" />
+          </div>
+          <div class="na-field full">
+            <div class="na-label">Service</div>
+            <select class="na-select" id="na-service">
+              <option value="">Select a service</option>
+            </select>
+          </div>
+          <div class="na-field">
+            <div class="na-label">Barber</div>
+            <select class="na-select" id="na-barber"></select>
+          </div>
+          <div class="na-field">
+            <div class="na-label">Price (JD)</div>
+            <input class="na-input" id="na-price" placeholder="e.g. 10" type="number" min="0" />
+          </div>
+          <div class="na-field">
+            <div class="na-label">Date</div>
+            <input class="na-input" id="na-date" type="date" />
+          </div>
+          <div class="na-field">
+            <div class="na-label">Time</div>
+            <select class="na-select" id="na-time"></select>
+          </div>
+          <hr class="na-divider" />
+          <div class="na-first-row">
+            <input type="checkbox" id="na-first" />
+            <label class="na-first-lbl" for="na-first">This is a first-time client</label>
+          </div>
+        </div>
+        <div class="na-actions">
+          <button class="na-btn cancel" onclick="closeNewAppt()">Cancel</button>
+          <button class="na-btn confirm" onclick="submitNewAppt()">Confirm Appointment</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOB APPLICATION DETAIL MODAL -->
+    <div class="jad-overlay" id="jad-overlay" onclick="if(event.target===this)closeJobApp()">
+      <div class="jad-modal">
+        <div class="jad-header">
+          <div class="jad-photo" id="jad-photo"></div>
+          <div>
+            <div class="jad-name" id="jad-name"></div>
+            <div class="jad-sub"  id="jad-sub"></div>
+          </div>
+          <button class="modal-close jad-close" onclick="closeJobApp()">&#x2715;</button>
+        </div>
+        <div class="jad-body" id="jad-body"></div>
+        <div class="jad-footer">
+          <div class="jad-status-stepper" id="jad-status-stepper">
+            <button class="jad-step-btn" data-status="new"       onclick="updateJobAppStatus('new')">New</button>
+            <button class="jad-step-btn" data-status="reviewed"  onclick="updateJobAppStatus('reviewed')">Reviewed</button>
+            <button class="jad-step-btn" data-status="shortlist" onclick="updateJobAppStatus('shortlist')">Shortlisted</button>
+            <button class="jad-step-btn" data-status="interview" onclick="updateJobAppStatus('interview')">Interview</button>
+            <button class="jad-step-btn jad-step-reject" data-status="rejected" onclick="updateJobAppStatus('rejected')">Rejected</button>
+          </div>
+          <div id="jad-interview-fields" class="jad-email-panel" style="display:none">
+            <div class="jad-email-panel-top">
+              <div class="jad-email-panel-lbl">Schedule Interview</div>
+              <div class="jad-datetime-row">
+                <div class="jad-dt-field">
+                  <label class="jad-dt-lbl">Date</label>
+                  <input type="date" id="jad-idate" class="jad-datetime-input" />
+                </div>
+                <div class="jad-dt-field">
+                  <label class="jad-dt-lbl">Time</label>
+                  <input type="time" id="jad-itime" class="jad-datetime-input" />
+                </div>
+                <button class="jad-send-icon-btn" id="jad-send-btn" onclick="sendJobAppEmailManual()" title="Send Interview Invitation">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="jad-reject-panel" class="jad-email-panel jad-reject-panel" style="display:none">
+            <div class="jad-email-panel-top">
+              <div class="jad-email-panel-lbl">Notify Applicant</div>
+              <button class="jad-send-icon-btn jad-send-icon-reject" id="jad-send-reject-btn" onclick="sendJobAppEmailManual()" title="Send Rejection Email">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+          <span class="jad-footer-date" id="jad-footer-date"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTNER DETAIL MODAL -->
+    <div class="partner-overlay" id="partner-overlay" onclick="if(event.target===this)closePartnerModal()">
+      <div class="partner-modal" id="partner-modal">
+        <div class="pm-header">
+          <div>
+            <div class="pm-brand" id="pm-brand"></div>
+            <div class="pm-sub" id="pm-sub"></div>
+          </div>
+          <button class="modal-close pm-close" onclick="closePartnerModal()">&#x2715;</button>
+        </div>
+        <div class="pm-body">
+          <div class="pm-section-label">Contact Information</div>
+          <div class="pm-fields-grid">
+            <div class="pm-field"><div class="pm-field-lbl">First Name</div><div class="pm-field-val" id="pm-firstname"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Last Name</div><div class="pm-field-val" id="pm-lastname"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Email Address</div><div class="pm-field-val" id="pm-email"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Mobile Number</div><div class="pm-field-val" id="pm-mobile"></div></div>
+          </div>
+          <div class="pm-section-label">Business Details</div>
+          <div class="pm-fields-grid">
+            <div class="pm-field"><div class="pm-field-lbl">Brand Name</div><div class="pm-field-val" id="pm-brandname"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Business Type</div><div class="pm-field-val" id="pm-biztype"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Account Status</div><div class="pm-field-val" id="pm-loggedin"></div></div>
+            <div class="pm-field"><div class="pm-field-lbl">Application Status</div><div class="pm-field-val" id="pm-status-field"></div></div>
+          </div>
+          <div class="pm-section-label">Commercial License</div>
+          <div id="pm-license-section"></div>
+        </div>
+        <div class="pm-footer">
+          <span class="pm-date-note" id="pm-date-note"></span>
+          <button class="partner-action-btn reject"  id="pm-reject-btn"  onclick="partnerModalAction('rejected')">Reject</button>
+          <button class="partner-action-btn approve" id="pm-approve-btn" onclick="partnerModalAction('approved')">Approve</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

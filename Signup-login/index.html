@@ -31,7 +31,7 @@
           <div class="dropdown-menu" id="dropdownMenu">
             <a href="../HomePage/index.html" class="dropdown-item">Home</a>
             <a href="../BookingPage/index.html" class="dropdown-item">Booking</a>
-            <a href="#" class="dropdown-item">Store</a>
+            <a href="#" class="dropdown-item" id="storeNavLink">Shop</a>
             <a href="../partnerPage/index.html" class="dropdown-item">Be a partner</a>
             <a href="../jobsPage/index.html" class="dropdown-item">Jobs</a>
           </div>
@@ -352,5 +352,32 @@
     </footer> 
     
     <script src="script.js"></script>
+
+    <!-- Coming Soon Modal -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet"/>
+    <style>
+      .cs-overlay{display:none;position:fixed;inset:0;z-index:9998;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(255,255,255,0.15);align-items:center;justify-content:center;}
+      .cs-overlay.active{display:flex;}
+      .cs-modal{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:38px 36px 32px;width:90%;max-width:420px;text-align:center;position:relative;}
+      .cs-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:18px;color:#191265;opacity:0.35;cursor:pointer;line-height:1;transition:opacity 0.2s;}
+      .cs-close:hover{opacity:0.8;}
+      .cs-icon-line{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;}
+      .cs-rule{width:40px;height:1px;background:#191265;opacity:0.2;}
+      .cs-modal h3{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;font-weight:400;color:#191265;margin-bottom:10px;}
+      .cs-modal p{font-family:'Roboto',sans-serif;font-weight:300;font-size:15px;color:#666;line-height:1.7;}
+    </style>
+    <div class="cs-overlay" id="csOverlay">
+      <div class="cs-modal">
+        <button class="cs-close" id="csClose">✕</button>
+        <div class="cs-icon-line">
+          <div class="cs-rule"></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#191265"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <div class="cs-rule"></div>
+        </div>
+        <h3>Coming Soon</h3>
+        <p>This shop is currently under setup and will be available soon.</p>
+      </div>
+    </div>
+
   </body>
 </html>

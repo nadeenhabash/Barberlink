@@ -1,198 +1,97 @@
-// ===================================
-// User Profile & Avatar Management
-// ===================================
+// =========================================
+// NAVIGATION
+// =========================================
 
-// SAFE Get user data from localStorage or sessionStorage
-function getUserData() {
-  try {
-    let userData = localStorage.getItem('userData');
-    if (userData) {
-      return JSON.parse(userData);
-    }
-    
-    userData = sessionStorage.getItem('userData');
-    if (userData) {
-      return JSON.parse(userData);
-    }
-    
-    return null;
-  } catch (error) {
-    console.error('Error reading user data:', error);
-    return null;
-  }
-}
-
-// Display user avatar and profile - WITH SAFETY CHECKS
-function displayUserProfile() {
-  const user = getUserData();
-  const userProfile = document.getElementById('userProfile');
-  const signUpLink = document.getElementById('signUpLink');
-  const userAvatar = document.getElementById('userAvatar');
-  const profileName = document.getElementById('profileName');
-  const profileEmail = document.getElementById('profileEmail');
-  
-  // Safety check - if elements don't exist, exit gracefully
-  if (!userProfile || !userAvatar) {
-    console.warn('User profile elements not found in DOM');
-    return;
-  }
-  
-  if (user && user.name) {
-    const firstLetter = user.name.charAt(0).toUpperCase();
-    
-    userAvatar.textContent = firstLetter;
-    if (profileName) profileName.textContent = user.name;
-    if (profileEmail) profileEmail.textContent = user.email || '';
-    
-    userProfile.style.display = 'block';
-    if (signUpLink) signUpLink.style.display = 'none';
-  } else {
-    userProfile.style.display = 'none';
-    if (signUpLink) signUpLink.style.display = 'block';
-  }
-}
-
-// Toggle profile dropdown - WITH SAFETY CHECK
-function toggleProfileDropdown() {
-  const dropdown = document.getElementById('profileDropdown');
-  if (!dropdown) {
-    console.warn('Profile dropdown not found');
-    return;
-  }
-  dropdown.classList.toggle('show');
-}
-
-// Logout functionality
-function logout() {
-  showLogoutModal();
-}
-
-function showLogoutModal() {
-  const modalOverlay = document.createElement('div');
-  modalOverlay.className = 'logout-alert-overlay';
-  modalOverlay.innerHTML = `
-    <div class="logout-alert">
-      <p>Are you sure you want to logout?</p>
-      <div class="logout-alert-buttons">
-        <button class="alert-cancel" onclick="closeLogoutModal()">Cancel</button>
-        <button class="alert-confirm" onclick="confirmLogout()">Logout</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modalOverlay);
-  setTimeout(() => modalOverlay.classList.add('active'), 10);
-}
-
-function closeLogoutModal() {
-  const modal = document.querySelector('.logout-alert-overlay');
-  if (modal) {
-    modal.classList.remove('active');
-    setTimeout(() => modal.remove(), 300);
-  }
-}
-
-function confirmLogout() {
-  try {
-    localStorage.removeItem('userData');
-    localStorage.removeItem('currentUser');
-    sessionStorage.removeItem('userData');
-    sessionStorage.removeItem('currentUser');
-    window.location.reload();
-  } catch (error) {
-    console.error('Error during logout:', error);
-    window.location.reload();
-  }
-}
-
-// Menu functionality
 function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    if (menu) {
-        menu.classList.toggle('active');
-    }
+  document.getElementById('dropdownMenu')?.classList.toggle('active');
 }
 
-// Logo and Home navigation
 function goToHomePage() {
-    try {
-        if (window.location.pathname.includes('vacancies')) {
-            window.location.href = '../HomePage/index.html';
-        } else {
-            window.location.href = './HomePage/index.html';
-        }
-    } catch (error) {
-        console.error('Navigation error:', error);
-        window.location.href = '/';
-    }
+  try {
+    const path = window.location.pathname.includes('vacancies')
+      ? '../HomePage/index.html'
+      : './HomePage/index.html';
+    window.location.href = path;
+  } catch (err) {
+    console.error('Navigation error:', err);
+    window.location.href = '/';
+  }
 }
 
 function openJobDetails(jobId) {
-    try {
-        window.location.href = `../jobApplication/index.html?job=${jobId}`;
-    } catch (error) {
-        console.error('Navigation error:', error);
-        alert('Job application page not available');
-    }
-}
-
-// Check and mark applied jobs - WITH TRY-CATCH
-function checkAppliedJobs() {
   try {
-    const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || '[]');
-    const jobIds = ['barber', 'salon-manager', 'social-media-manager-shanab', 'beard-specialist', 'customer-experience', 'marketing-specialist'];
-    
-    jobIds.forEach((jobId, index) => {
-        const jobCard = document.querySelectorAll('.job-card')[index];
-        if (jobCard && appliedJobs.includes(jobId)) {
-            if (!jobCard.querySelector('.applied-badge')) {
-                const badge = document.createElement('div');
-                badge.className = 'applied-badge';
-                badge.innerHTML = '';
-                jobCard.appendChild(badge);
-                jobCard.classList.add('job-applied');
-            }
-        }
-    });
-  } catch (error) {
-    console.error('Error checking applied jobs:', error);
+    window.location.href = `../jobApplication/index.html?job=${jobId}`;
+  } catch (err) {
+    console.error('Navigation error:', err);
+    alert('Job application page not available');
   }
 }
 
-// Animation functions
-function isElementPartiallyInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  const elementHeight = rect.height;
-  
-  return (
-    rect.top < windowHeight - (elementHeight * 0.3) &&
-    rect.bottom > (elementHeight * 0.3)
-  );
+// =========================================
+// APPLIED JOBS
+// =========================================
+
+function checkAppliedJobs() {
+  try {
+    const userData    = localStorage.getItem('userData');
+    const currentUser = userData ? JSON.parse(userData) : null;
+    const email       = currentUser?.email || currentUser?.id || null;
+
+    if (!email) return;
+
+    const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs_' + email) || '[]');
+    const jobIds = [
+      'barber',
+      'salon-manager',
+      'social-media-manager-shanab',
+      'beard-specialist',
+      'customer-experience',
+      'marketing-specialist',
+    ];
+
+    document.querySelectorAll('.job-card').forEach((card, i) => {
+      if (appliedJobs.includes(jobIds[i]) && !card.querySelector('.applied-badge')) {
+        const badge = document.createElement('div');
+        badge.className = 'applied-badge';
+        card.appendChild(badge);
+        card.classList.add('job-applied');
+      }
+    });
+  } catch (err) {
+    console.error('Error checking applied jobs:', err);
+  }
+}
+
+// =========================================
+// ANIMATIONS
+// =========================================
+
+function isPartiallyInViewport(el) {
+  const rect   = el.getBoundingClientRect();
+  const winH   = window.innerHeight || document.documentElement.clientHeight;
+  const elH    = rect.height;
+  return rect.top < winH - elH * 0.3 && rect.bottom > elH * 0.3;
 }
 
 function animateJobCards() {
-  const jobCards = document.querySelectorAll('.job-card');
-  jobCards.forEach((card, index) => {
-    if (isElementPartiallyInViewport(card) && !card.classList.contains('animate-in')) {
-      setTimeout(() => {
-        card.classList.add('animate-in');
-      }, index * 80);
+  document.querySelectorAll('.job-card').forEach((card, i) => {
+    if (isPartiallyInViewport(card) && !card.classList.contains('animate-in')) {
+      setTimeout(() => card.classList.add('animate-in'), i * 80);
     }
   });
 }
 
-function throttle(func, wait) {
-  let timeout;
-  let lastRan;
-  return function executedFunction(...args) {
+function throttle(fn, wait) {
+  let timeout, lastRan;
+  return function (...args) {
     if (!lastRan) {
-      func(...args);
+      fn(...args);
       lastRan = Date.now();
     } else {
       clearTimeout(timeout);
-      timeout = setTimeout(function() {
-        if ((Date.now() - lastRan) >= wait) {
-          func(...args);
+      timeout = setTimeout(() => {
+        if (Date.now() - lastRan >= wait) {
+          fn(...args);
           lastRan = Date.now();
         }
       }, wait - (Date.now() - lastRan));
@@ -202,81 +101,58 @@ function throttle(func, wait) {
 
 const throttledAnimateJobCards = throttle(animateJobCards, 50);
 
-// ===================================
-// Event Listeners - WITH SAFETY CHECKS
-// ===================================
+// =========================================
+// INIT
+// =========================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize user profile safely
-    try {
-        displayUserProfile();
-    } catch (error) {
-        console.error('Error displaying user profile:', error);
-    }
-    
-    // Avatar click event - WITH NULL CHECK
-    const userAvatar = document.getElementById('userAvatar');
-    if (userAvatar) {
-        userAvatar.addEventListener('click', function(e) {
-            e.stopPropagation();
-            toggleProfileDropdown();
-        });
-    }
-    
-    // Logout button event - WITH NULL CHECK
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            logout();
-        });
-    }
-    
-    // Check applied jobs on page load
-    checkAppliedJobs();
-    
-    // Initialize job card animations
+document.addEventListener('DOMContentLoaded', () => {
+  checkAppliedJobs();
+
+  setTimeout(animateJobCards, 50);
+
+  // Optimise card rendering
+  document.querySelectorAll('.job-card').forEach(card => {
+    card.style.backfaceVisibility = 'hidden';
+    card.style.perspective = '1000px';
+  });
+
+  // Footer fade-in
+  const footerText = document.querySelector('.footer p');
+  if (footerText) {
+    Object.assign(footerText.style, { opacity: '0', transform: 'translateY(10px)' });
     setTimeout(() => {
-        animateJobCards();
-    }, 50);
-    
-    // Job card perspective settings
-    const jobCards = document.querySelectorAll('.job-card');
-    jobCards.forEach(card => {
-        card.style.backfaceVisibility = 'hidden';
-        card.style.perspective = '1000px';
-    });
+      Object.assign(footerText.style, {
+        transition: 'all 0.4s ease',
+        opacity: '1',
+        transform: 'translateY(0)',
+      });
+    }, 200);
+  }
 
-    // Footer animation
-    const footer = document.querySelector('.footer p');
-    if (footer) {
-        footer.style.opacity = '0';
-        footer.style.transform = 'translateY(10px)';
-        
-        setTimeout(() => {
-            footer.style.transition = 'all 0.4s ease';
-            footer.style.opacity = '1';
-            footer.style.transform = 'translateY(0)';
-        }, 200);
-    }
+  // Coming Soon modal
+  const overlay   = document.getElementById('csOverlay');
+  const closeBtn  = document.getElementById('csClose');
+  const storeLink = document.getElementById('storeNavLink');
+
+  if (!overlay) return;
+
+  const openModal  = e => { e.preventDefault(); overlay.classList.add('active'); };
+  const closeModal = ()  => overlay.classList.remove('active');
+
+  storeLink?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 });
 
-// Close menu when clicking outside - WITH NULL CHECKS
-document.addEventListener('click', function(event) {
-  const menuContainer = document.querySelector('.menu-container');
-  const menu = document.getElementById('dropdownMenu');
-  const userProfile = document.getElementById('userProfile');
-  const profileDropdown = document.getElementById('profileDropdown');
-  
-  if (menuContainer && menu && !menuContainer.contains(event.target)) {
+// Close dropdown on outside click
+document.addEventListener('click', e => {
+  const container = document.querySelector('.menu-container');
+  const menu      = document.getElementById('dropdownMenu');
+  if (container && menu && !container.contains(e.target)) {
     menu.classList.remove('active');
   }
-  
-  if (userProfile && profileDropdown && !userProfile.contains(event.target)) {
-    profileDropdown.classList.remove('show');
-  }
 });
 
-// Scroll and resize listeners
+// Scroll / resize animation triggers
 document.addEventListener('scroll', throttledAnimateJobCards, { passive: true });
 window.addEventListener('resize', throttledAnimateJobCards);

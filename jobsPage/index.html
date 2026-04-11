@@ -1,165 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Vacancies - BarberLink</title>
-    <link href="https://fonts.cdnfonts.com/css/bugaki" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Vacancies - BarberLink</title>
+
+  <link href="https://fonts.cdnfonts.com/css/bugaki" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/garet" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../shared/auth-navbar.css" />
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            
-            <div class="logo-link" onclick="goToHomePage()" style="cursor: pointer;">
-               <a href="../HomePage/index.html"
-          ><img src="imgs/barbericon.png" alt="Logo" class="barber-pole"
-        /></a>
-                <span class="logo-badge">HomePage</span>
-            </div>
 
-            <h1 class="page-title">Available Vacancies</h1>
+  <div class="container">
 
-            <div class="menu-container">
-                <div class="menu-dots" onclick="toggleMenu()">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <!-- Profile Avatar (Hidden by default, shown when logged in) -->
-                <div class="user-profile" id="userProfile" style="display: none;">
-                    <div class="avatar-circle" id="userAvatar">
-                        <!-- First letter will be inserted here by JavaScript -->
-                    </div>
-                    <div class="profile-dropdown" id="profileDropdown">
-                        <div class="profile-info">
-                            <p class="profile-name" id="profileName">User Name</p>
-                            <p class="profile-email" id="profileEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="176264726557726f767a677b723974787a">[email&#160;protected]</a></p>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-link">Profile Settings</a>
-                        <a href="#" class="dropdown-link">My Bookings</a>
-                        <a href="#" class="dropdown-link" id="logoutBtn">Logout</a>
-                    </div>
-                </div>
-                
-                
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="../HomePage/index.html" class="dropdown-item">Home</a>
-                    <a href="../BookingPage/index.html" class="dropdown-item">Booking</a>
-                    <a href="#" class="dropdown-item">Store</a>
-                    <a href="../partnerPage/index.html" class="dropdown-item">Be a partner</a>
-                    <a href="../Signup-login/index.html" class="dropdown-item">Login</a>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Jobs Container -->
-        <div class="jobs-container">
-            <!-- Job 1 -->
-            <div class="job-card" onclick="openJobDetails('barber')" >
-                <div class="job-location">Amman, Jordan</div>
-                <div class="job-title">Professional Barber at <span class="shop-name">Fares Barber Shop</span></div>
-                <div class="job-description">
-                    We're looking for a skilled and passionate Professional Barber to join our team and deliver top-quality grooming services to our clients. As a key member of our barbershop, you'll be responsible for creating stylish, modern, and classic haircuts, providing expert shaves, and ensuring every client leaves looking and feeling their best.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Job 2 -->
-            <div class="job-card" onclick="openJobDetails('salon-manager')">
-                <div class="job-location">Amman, Jordan</div>
-                <div class="job-title">Salon Manager at <span class="shop-name">Capri Salon Barbershop</span></div>
-                <div class="job-description">
-                    We are seeking a Salon Manager to lead our barbershop team, ensure smooth day-to-day operations, and create an exceptional client experience. The Salon Manager will oversee staff scheduling, inventory, and customer service while supporting the growth and success of the shop.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Job 3 -->
-            <div class="job-card" onclick="openJobDetails('social-media-manager-shanab')">
-                <div class="job-location">Zarqa, Jordan</div>
-                <div class="job-title">Social Media Manager at <span class="shop-name">Shanab Barber Shop</span></div>
-                <div class="job-description">
-                    We are looking for a creative and results-driven Social Media Manager to build our barbershop's online presence and engage with our community across all digital platforms. The ideal candidate will be passionate about content creation, marketing trends, and growing brand visibility while showcasing our services and culture.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Job 4 -->
-            <div class="job-card" onclick="openJobDetails('beard-specialist')">
-                <div class="job-location">Zarqa, Jordan</div>
-                <div class="job-title">Beard & Grooming Specialist at <span class="shop-name">Shabab Barber Shop</span></div>
-                <div class="job-description">
-                    We are seeking a skilled Beard & Grooming Specialist to join our team and deliver top-quality beard care and grooming services to our clients. This role focuses on precision, style, and customer satisfaction, ensuring each client leaves with a sharp, confident look.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Job 5 -->
-            <div class="job-card" onclick="openJobDetails('customer-experience')">
-                <div class="job-location">Zarqa, Jordan</div>
-                <div class="job-title">Customer Experience Associate at <span class="shop-name">Mr Black barbershop</span></div>
-                <div class="job-description">
-                    We're looking for a friendly, energetic Customer Experience Associate to be the face of our barbershop. This role is all about creating a welcoming atmosphere, ensuring clients have a smooth, enjoyable experience from the moment they book an appointment to the time they leave looking their best.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-
-            <!-- Job 6 -->
-            <div class="job-card" onclick="openJobDetails('marketing-specialist')">
-                <div class="job-location">Amman, Jordan</div>
-                <div class="job-title">Marketing & Promotions Specialist at <span class="shop-name">O&M Barber Shop</span></div>
-                <div class="job-description">
-                    We are looking for a creative and results-driven Marketing & Promotions Specialist to help grow our barbershop's brand, attract new clients, and keep our community engaged. This role focuses on creating effective marketing campaigns, organizing promotions, and ensuring our services reach the right audience.
-                </div>
-                <div class="arrow">
-                    <div class="arrow-top"></div>
-                    <div class="arrow-bottom"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Profile Settings Modal -->
-<div class="modal-overlay" id="profileModal">
-  <div class="modal-container">
-    <div class="modal-header">
-      <h2>Profile Settings</h2>
-      <span class="close-modal" onclick="closeProfileModal()">×</span>
-    </div>
-    <div class="modal-body">
-      <div class="settings-options">
-        <!-- Settings menu will be here -->
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-link" onclick="goToHomePage()" style="cursor:pointer;">
+        <a href="../HomePage/index.html">
+          <img src="imgs/barbericon.png" alt="BarberLink Logo" class="barber-pole" />
+        </a>
+        <span class="logo-badge">HomePage</span>
       </div>
+
+      <h1 class="page-title">Available Vacancies</h1>
+
+      <div class="menu-container">
+        <div class="menu-dots" onclick="toggleMenu()">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div id="auth-nav-mount"></div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+          <a href="../HomePage/index.html"          class="dropdown-item">Home</a>
+          <a href="../BookingPage/index.html"        class="dropdown-item">Booking</a>
+          <a href="#"                               class="dropdown-item" id="storeNavLink">Shop</a>
+          <a href="../partnerPage/index.html"        class="dropdown-item">Be a partner</a>
+          <a href="../Signup-login/index.html"       class="dropdown-item">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Job Listings -->
+    <main class="jobs-container">
+
+      <div class="job-card" onclick="openJobDetails('barber')">
+        <div class="job-location">Amman, Jordan</div>
+        <div class="job-title">Professional Barber at <span class="shop-name">Fares Barber Shop</span></div>
+        <p class="job-description">
+          We're looking for a skilled and passionate Professional Barber to join our team and deliver
+          top-quality grooming services to our clients. As a key member of our barbershop, you'll be
+          responsible for creating stylish, modern, and classic haircuts, providing expert shaves, and
+          ensuring every client leaves looking and feeling their best.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetails('salon-manager')">
+        <div class="job-location">Amman, Jordan</div>
+        <div class="job-title">Salon Manager at <span class="shop-name">Capri Salon Barbershop</span></div>
+        <p class="job-description">
+          We are seeking a Salon Manager to lead our barbershop team, ensure smooth day-to-day
+          operations, and create an exceptional client experience. The Salon Manager will oversee
+          staff scheduling, inventory, and customer service while supporting the growth and success
+          of the shop.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetails('social-media-manager-shanab')">
+        <div class="job-location">Zarqa, Jordan</div>
+        <div class="job-title">Social Media Manager at <span class="shop-name">Shanab Barber Shop</span></div>
+        <p class="job-description">
+          We are looking for a creative and results-driven Social Media Manager to build our
+          barbershop's online presence and engage with our community across all digital platforms.
+          The ideal candidate will be passionate about content creation, marketing trends, and growing
+          brand visibility while showcasing our services and culture.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetails('beard-specialist')">
+        <div class="job-location">Zarqa, Jordan</div>
+        <div class="job-title">Beard &amp; Grooming Specialist at <span class="shop-name">Shabab Barber Shop</span></div>
+        <p class="job-description">
+          We are seeking a skilled Beard &amp; Grooming Specialist to join our team and deliver
+          top-quality beard care and grooming services to our clients. This role focuses on precision,
+          style, and customer satisfaction, ensuring each client leaves with a sharp, confident look.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetails('customer-experience')">
+        <div class="job-location">Zarqa, Jordan</div>
+        <div class="job-title">Customer Experience Associate at <span class="shop-name">Mr Black Barbershop</span></div>
+        <p class="job-description">
+          We're looking for a friendly, energetic Customer Experience Associate to be the face of our
+          barbershop. This role is all about creating a welcoming atmosphere, ensuring clients have a
+          smooth, enjoyable experience from the moment they book an appointment to the time they leave
+          looking their best.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetails('marketing-specialist')">
+        <div class="job-location">Amman, Jordan</div>
+        <div class="job-title">Marketing &amp; Promotions Specialist at <span class="shop-name">O&amp;M Barber Shop</span></div>
+        <p class="job-description">
+          We are looking for a creative and results-driven Marketing &amp; Promotions Specialist to
+          help grow our barbershop's brand, attract new clients, and keep our community engaged. This
+          role focuses on creating effective marketing campaigns, organizing promotions, and ensuring
+          our services reach the right audience.
+        </p>
+        <div class="arrow"><div class="arrow-top"></div><div class="arrow-bottom"></div></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- auth modals injected by auth-navbar.js -->
+
+  <footer class="footer">
+    <p>© 2025 BarberLink. All rights reserved. | Connecting barbers with opportunities</p>
+  </footer>
+
+  <!-- Coming Soon Modal -->
+  <div class="cs-overlay" id="csOverlay">
+    <div class="cs-modal">
+      <button class="cs-close" id="csClose">✕</button>
+      <div class="cs-icon-line">
+        <div class="cs-rule"></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#191265">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div class="cs-rule"></div>
+      </div>
+      <h3>Coming Soon</h3>
+      <p>This shop is currently under setup and will be available soon.</p>
     </div>
   </div>
-</div>
-    <!-- Simple Footer -->
-    <footer class="footer">
-        <p>© 2025 BarberLink. All rights reserved. | Connecting barbers with opportunities</p>
-    </footer>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
+  <script src="../shared/auth-navbar.js"></script>
 </body>
 </html>

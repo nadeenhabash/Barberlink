@@ -542,6 +542,7 @@ let _editCalMonth = new Date().getMonth();
 let _editSelDate = null;
 let _editSelTime = null;
 let _editSelSvcs = [];
+let _editPromoCode = null;
 let _editShopSvcs = [];
 
 /* ── Open / Close ── */
@@ -778,6 +779,7 @@ function openBookingEdit(ref) {
   // Load shop services
   _editShopSvcs = SHOPS_DATA[bk.shop] || [];
   _editSelSvcs  = Array.isArray(bk.svcs) ? [...bk.svcs] : (bk.svcs ? [bk.svcs] : []);
+  _editPromoCode = bk.promoCode || null;
 
   // Calendar defaults
   const cur = new Date(bk.date);
@@ -881,15 +883,32 @@ function _updateSvcTriggerText() {
 }
 
 function _updateSvcTotal() {
-  const total = _editSelSvcs.reduce((sum, name) => {
+  const rawTotal = _editSelSvcs.reduce((sum, name) => {
     const s = _editShopSvcs.find(x => x.name === name);
     return sum + (s ? s.price : 0);
   }, 0);
   const el = document.getElementById('editSvcTotal');
   if (!el) return;
-  el.innerHTML = _editSelSvcs.length
-    ? `<span class="bk-svc-total-lbl">${_editSelSvcs.length} service${_editSelSvcs.length>1?'s':''}</span><span class="bk-svc-total-val">${total} JD</span>`
-    : `<span class="bk-svc-total-none">Select at least one service</span>`;
+  if (!_editSelSvcs.length) {
+    el.innerHTML = `<span class="bk-svc-total-none">Select at least one service</span>`;
+    return;
+  }
+  // Re-apply promo if the booking originally had one
+  let finalTotal = rawTotal;
+  if (_editPromoCode) {
+    const promos = (() => { try { return JSON.parse(localStorage.getItem('barberlink_promos')||'[]'); } catch(e){return[];} })();
+    const promo = promos.find(p => p.code === _editPromoCode);
+    if (promo) {
+      finalTotal = promo.type === 'percent'
+        ? Math.max(0, rawTotal - Math.round(rawTotal * promo.value / 100))
+        : Math.max(0, rawTotal - promo.value);
+    }
+  }
+  const discounted = finalTotal !== rawTotal;
+  el.innerHTML = `<span class="bk-svc-total-lbl">${_editSelSvcs.length} service${_editSelSvcs.length>1?'s':''}</span>`
+    + (discounted ? `<span class="bk-svc-total-val" style="text-decoration:line-through;opacity:0.5;margin-right:6px">${rawTotal} JD</span>` : '')
+    + `<span class="bk-svc-total-val">${finalTotal} JD</span>`
+    + (discounted ? `<span class="bk-svc-total-lbl" style="color:var(--accent);margin-left:4px">(${_editPromoCode})</span>` : '');
 }
 
 /* ── Custom Calendar ── */
@@ -994,15 +1013,28 @@ function saveBookingEdit() {
     if (idx === -1) { showFormMessage('edit-booking-message','Booking not found.','error'); return; }
 
     const shopSvcs = SHOPS_DATA[bookings[idx].shop] || [];
-    const newTotal = _editSelSvcs.reduce((sum,name) => {
+    const rawTotal = _editSelSvcs.reduce((sum,name) => {
       const s = shopSvcs.find(x => x.name === name);
       return sum + (s ? s.price : 0);
     }, 0);
 
-    bookings[idx].svcs  = _editSelSvcs;
-    bookings[idx].date  = new Date(_editSelDate).toISOString();
-    bookings[idx].time  = _editSelTime;
-    bookings[idx].total = newTotal;
+    // Re-apply original promo discount if it still exists and is valid
+    let newTotal = rawTotal;
+    if (_editPromoCode) {
+      const promos = (() => { try { return JSON.parse(localStorage.getItem('barberlink_promos')||'[]'); } catch(e){return[];} })();
+      const promo = promos.find(p => p.code === _editPromoCode);
+      if (promo) {
+        newTotal = promo.type === 'percent'
+          ? Math.max(0, rawTotal - Math.round(rawTotal * promo.value / 100))
+          : Math.max(0, rawTotal - promo.value);
+      }
+    }
+
+    bookings[idx].svcs      = _editSelSvcs;
+    bookings[idx].date      = new Date(_editSelDate).toISOString();
+    bookings[idx].time      = _editSelTime;
+    bookings[idx].total     = newTotal;
+    bookings[idx].promoCode = _editPromoCode || bookings[idx].promoCode || null;
 
     localStorage.setItem('barberlink_bookings', JSON.stringify(bookings));
     showFormMessage('edit-booking-message','Appointment updated successfully!','success');

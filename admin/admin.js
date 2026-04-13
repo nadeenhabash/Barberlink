@@ -320,7 +320,13 @@ const SHOP_NAME_MAP = {
           .querySelectorAll(".nav-item")
           .forEach((n) => n.classList.remove("active"));
         document.getElementById("page-" + page).classList.add("active");
-        if (navEl) navEl.classList.add("active");
+        if (navEl) {
+          navEl.classList.add("active");
+        } else {
+          const match = document.querySelector('.nav-item[href="#' + page + '"]');
+          if (match) match.classList.add("active");
+        }
+        if (location.hash !== "#" + page) history.pushState(null, "", "#" + page);
         const titles = {
           dashboard: "Dashboard",
           appointments: "Appointments",
@@ -1199,7 +1205,7 @@ const SHOP_NAME_MAP = {
         if (!recipient) {
           showToast("Please enter a recipient email address.", "warning");
           document.getElementById("email-overlay").classList.remove("visible");
-          showPage('email', document.querySelector('[onclick*="email"]'));
+          showPage('email', null);
           return;
         }
 
@@ -2509,7 +2515,7 @@ const SHOP_NAME_MAP = {
         if (n) { n.read = true; saveNotifs(notifs); }
         renderNotifDropdown();
         toggleNotifDropdown();
-        showPage(page, document.querySelector('[onclick*="' + page + '"]'));
+        showPage(page, null);
       }
 
       function clearAllNotifs() {
@@ -2562,4 +2568,23 @@ document.addEventListener('DOMContentLoaded', function() {
   try { allJobApps  = JSON.parse(localStorage.getItem('barberlink_job_applications') || '[]'); } catch(e) { allJobApps = []; }
   renderNotifDropdown();
   updateNavBadges();
+
+  // Hash-based routing: navigate to the section in the URL on load
+  const validPages = ['dashboard','appointments','customers','shops','partners','jobapps','ratings','promos','email','settings'];
+  function navigateToHash() {
+    const hash = location.hash.replace('#', '');
+    const page = validPages.includes(hash) ? hash : 'appointments';
+    showPage(page, null);
+  }
+  navigateToHash();
+  window.addEventListener('hashchange', navigateToHash);
+
+  // Intercept nav link clicks to prevent page jump, handle via JS
+  document.querySelectorAll('.nav-item').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const page = this.getAttribute('href').replace('#', '');
+      showPage(page, this);
+    });
+  });
 });
